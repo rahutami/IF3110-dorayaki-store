@@ -4,16 +4,15 @@ class DBConnection {
 
     public function connect() {
         if ($this->db == null) {
-            $this->db = new \PDO("sqlite:db/dorayakistore.db");
+            $this->db = new PDO("sqlite:db/dorayakistore.db");
         }
         $this->initTables();
-
         return $this->db;
     }
 
     public function initTables(){
         $this->db->exec("CREATE TABLE IF NOT EXISTS dorayaki (
-                    id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
+                    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                     name VARCHAR(100) NOT NULL,
                     amount INTEGER NOT NULL,
                     price INTEGER NOT NULL,
@@ -22,7 +21,7 @@ class DBConnection {
                     );",);
         
         $this->db->exec("CREATE TABLE IF NOT EXISTS user (
-                    id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
+                    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                     name VARCHAR(50) NOT NULL,
                     password VARCHAR(255) NOT NULL,
                     email VARCHAR(75) NOT NULL,
