@@ -3,13 +3,13 @@ require_once('./db/DBConnection.php');
 $db = (new DBConnection())->connect();
 
 try{
-    if(true){
+    // if(true){
         // TODO: uncomment once frontend is ok
-    // if ($_POST["id"] || $_POST["name"] ) {
+    if ($_POST["id"] || $_POST["name"] ) {
         $stmt = $db->prepare("DELETE FROM dorayaki WHERE id = ?");
 
         // TODO: to be replaced by $_POST
-        $stmt->execute(array(3));
+        $stmt->execute(array($_POST["id"]));
 
         echo $stmt->rowCount();
     }

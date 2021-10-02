@@ -3,7 +3,6 @@ require_once('./db/DBConnection.php');
 $db = (new DBConnection())->connect();
 
 try{
-    // if(true){
         // TODO: uncomment once frontend is ok
     if ($_POST["name"] && $_POST["amount"] && $_POST["price"] && $_POST["description"] && $_POST["img_path"]) {
         $stmt = $db->prepare("INSERT INTO dorayaki (name, amount, price, description, img_path) VALUES (?,?,?,?,?)");
