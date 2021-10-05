@@ -27,6 +27,25 @@ class DBConnection {
                     email VARCHAR(75) NOT NULL,
                     admin SMALLINT NOT NULL DEFAULT 0
                     );");
+        
+        $this->db->exec("CREATE TABLE IF NOT EXISTS riwayat_perubahan (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    id_dorayaki INTEGER NOT NULL,
+                    id_user INTEGER NOT NULL,
+                    amount_changed INTEGER NOT NULL,
+                    new_amount INTEGER NOT NULL,      
+                    FOREIGN KEY (id_dorayaki) REFERENCES dorayaki(id),
+                    FOREIGN KEY (id_user) REFERENCES user(id)
+                    );");
+        
+        $this->db->exec("CREATE TABLE IF NOT EXISTS riwayat_pembelian (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    id_dorayaki INTEGER NOT NULL,
+                    id_user INTEGER NOT NULL,
+                    amount INTEGER NOT NULL,     
+                    FOREIGN KEY (id_dorayaki) REFERENCES dorayaki(id),
+                    FOREIGN KEY (id_user) REFERENCES user(id)
+                    );");
     }
 }
 ?>

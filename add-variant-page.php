@@ -21,7 +21,9 @@
         <button>Submit</button>
     </form>
     <div>
-        <?php if ($_GET["success"] == "true") {?>
+        <?php if (!isset($_GET["success"])) { 
+
+        } else if ($_GET["success"] == "true") {?>
         <h3>Varian baru telah berhasil diunggah</h3>
         <?php } else if ($_GET["success"] == "false"){ ?>
         <h3>Data tidak lengkap</h3>
