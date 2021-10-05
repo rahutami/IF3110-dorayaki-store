@@ -3,14 +3,18 @@ require_once('./db/DBConnection.php');
 $db = (new DBConnection())->connect();
 
 try{
+    // ! method: perubahan or pembelian
+    // ! perubahan = perubahan by admin
+    // ! pembelian = pembelian by pelanggan
+
+    // * ASUMSI:
+    // * - kalo pembelian itu gamasuk ke riwayat perubahan tapi cuma ke riwayat pembelian, vice versa
+    // * - pas perubahan by admin inputnya new amount
+    // * - pas pembelian inputnya amount yg dibeli
+    
     if ($_POST["id"] && $_POST["amount"] && $_POST["method"]) {
         $dorayaki = $db->query("SELECT * FROM dorayaki where id = " . $_POST["id"])->fetch();
         $stmt_dorayaki = $db->prepare("UPDATE dorayaki SET amount = ? WHERE id = ?");
-        
-        // * ASUMSI:
-        // * - kalo pembelian itu gamasuk ke riwayat perubahan tapi cuma ke riwayat pembelian
-        // * - pas perubahan by admin inputnya new amount
-        // * - pas pembelian inputnya amount yg dibeli
 
         if($_POST["method"] == "pembelian"){
             $new_amount = (int) $dorayaki["amount"] - (int) $_POST["amount"];
