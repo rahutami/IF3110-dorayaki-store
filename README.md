@@ -1,4 +1,7 @@
-## Panduan Pengerjaan
+# CARA RUN
+`php -S localhost:8000`
+
+# Panduan Pengerjaan
 Berikut adalah hal yang harus diperhatikan untuk pengumpulan tugas ini:
 1. Buatlah grup pada Gitlab dengan format "IF3110-2021-KXX-01-YY", dengan XX adalah nomor kelas dan YY adalah nomor kelompok.
 2. Tambahkan anggota tim pada grup anda.

@@ -1,27 +1,22 @@
 <?php
-// require 'functions.php';
-if (isset($_POST["register"])) {
-    $file_name = 'users' . '.json';
-    if (file_exists($file_name)) {
-        $data = $_POST;
-        $username = $data["username"];
-        $password = $data["password"];
-        // tambahkan user baru ke file json
-        $current_data = file_get_contents($file_name);
-        $array_data = json_decode($current_data, true);
-        $array_data[$username] = $password;
-        $new_data = json_encode($array_data);
-        // echo "New data: " . $new_data;
-        if (file_put_contents($file_name, $new_data)) {
-            echo 'Success';
-            header("Location: login.php");
-        } else {
-            echo 'There is some error';
-        }
-    } else {
-        echo "File not exists<br>";
-    }
+require_once('db/DBConnection.php');
+$db = (new DBConnection())->connect();
+try{
+    if ($_POST["username"] && $_POST["password"] && $_POST["email"]) {
+        $hashed_password = password_hash($_POST["password"],PASSWORD_DEFAULT);
+        $stmt = $db->prepare("INSERT INTO user (name, password, email) VALUES (?,?,?)");
+        $stmt->execute(array($_POST["username"], $hashed_password, $_POST["email"]));
+        header('Location: login.php');
+    } 
+    // else {
+        // TODO
+        // echo 'There is some error';
+    // }
+
+} catch(PDOException $e) {
+echo "Error: " . $e->getMessage();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -40,8 +35,12 @@ if (isset($_POST["register"])) {
         <div class="container">
             <h1>Register</h1>
             <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" placeholder="Email" required />
+            </div>
+            <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" name="username" placeholder="Username" required />
+                <input type="text" name="username" placeholder="Username" pattern="([A-Za-z0-9_])+" required />
             </div>
             <div class="form-group">
                 <label for="password">Password</label>

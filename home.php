@@ -1,11 +1,11 @@
 <?php 
-session_start();
-if (!isset($_SESSION["login"])) {
-  header("Location: ../login.php");
-}
-$current_user = $_SESSION["username"];
-$cart = $_SESSION["cart"];
-$totalItems = count($cart);
+// session_start();
+// if (!isset($_SESSION["login"])) {
+//   header("Location: login.php");
+// }
+// $current_user = $_SESSION["username"];
+// $cart = $_SESSION["cart"];
+// $totalItems = count($cart);
 ?>
 
 <!DOCTYPE html>
