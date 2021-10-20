@@ -58,26 +58,42 @@ echo "Error: " . $e->getMessage();
 <script>
 function checkUsernameValidity(str) {
   if (str.length == 0) {
-    document.getElementById("usernameValidity").innerHTML = "masih kosong";
+    document.getElementById("usernameValidity").innerHTML = "";
+    document.getElementById("username-not-valid").style.border = "none";
     return;
   } else {
     const xmlhttp = new XMLHttpRequest();
     xmlhttp.onload = function() {
-      document.getElementById("usernameValidity").innerHTML = "Response text:"+this.responseText;
+    //   document.getElementById("usernameValidity").innerHTML = this.responseText;
+      if (this.responseText == "valid") {
+          document.getElementById("username-not-valid").style.border = "1px solid green";
+          document.getElementById("usernameValidity").innerHTML = "";
+      }
+      else {
+        document.getElementById("username-not-valid").style.border = "1px solid red";
+        document.getElementById("usernameValidity").innerHTML = this.responseText;
+      }
     }
   xmlhttp.open("GET", "check-username-validity.php?username=" + str);
   xmlhttp.send();
   }
+  
   // TODO gatau kenapa masih gabisa change bordernya
-  if (this.responseText === "not valid") {
-    //   document.getElementById("username-not-valid").style.border = "1px solid red";
-      let element = document.getElementById("username-not-valid");
-      element.setAttribute("style", "border: 2px solid #5A5A5A; color: red");
-    //   document.getElementById("username-not-valid").innerHTML = "nottt valid!!";
-  }
-  if (this.responseText === "valid"){
-      document.getElementById("username-not-valid").style.border = "1px solid green";
-  }
+  //if (this.responseText === "not valid") {
+//     if (document.getElementById("usernameValidity").textContent == "not valid") {
+//       document.getElementById("username-not-valid").style.border = "1px solid red";
+//     //   let element = document.getElementById("username-not-valid");
+//     //   element.setAttribute("style", "border: 2px solid #5A5A5A; color: red");
+//     //   alert(document.getElementById("username-not-valid").style.border);
+
+//     //   document.getElementById("username-not-valid").innerHTML = "nottt valid!!";
+//   }
+//    if (document.getElementById("usernameValidity").textContent == "valid") {
+// //   if (this.responseText === "valid"){
+//       document.getElementById("username-not-valid").style.border = "1px solid green";
+//     //   alert(document.getElementById("username-not-valid").style.border);
+
+//   }
 }
 </script>
 </html>
