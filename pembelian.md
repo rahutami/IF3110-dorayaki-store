@@ -9,8 +9,8 @@ Perbedaannya dengan admin:
 - [] Pada user, perlu ditampilkan total biaya yang harus dibayarkan, sedangkan pada admin tidak.
 
 ## Halaman Pengubahan Stok / Pembelian Dorayaki
-- [] Pada halaman ini pengguna dapat memilih jumlah pengubahan stok / pembelian varian dorayaki
-- [] Pengguna tidak dapat melakukan pengurangan stok / pembelian varian dorayaki melebihi banyak varian dorayaki yang tersedia.
-- [] Jika pengguna login sebagai user, perubahan total harga ditampilkan secara **real-time** sesuai dengan perubahan jumlah pembelian varian dorayaki. 
+- [x] Pada halaman ini pengguna dapat memilih jumlah pengubahan stok / pembelian varian dorayaki
+- [x] Pengguna tidak dapat melakukan pengurangan stok / pembelian varian dorayaki melebihi banyak varian dorayaki yang tersedia.
+- [x] Jika pengguna login sebagai user, perubahan total harga ditampilkan secara **real-time** sesuai dengan perubahan jumlah pembelian varian dorayaki. 
 - [] Sedangkan, jika sebagai admin tidak perlu menampilkan total harga.
 - [] Pastikan setelah proses pengubahan stok, ketersediaan varian dorayaki berubah sesuai yang diinginkan.
