@@ -7,11 +7,11 @@ try {
     // if admin
     $stmt = $db->prepare("SELECT * FROM dorayaki as d inner join riwayat_perubahan as rp on rp.id_dorayaki = d.id");
     $stmt->execute();
-    $result = $stmt->fetchall();
+    $perubahan = $stmt->fetchall();
     // if user
-    // $stmt = $db->prepare("SELECT * FROM dorayaki as d inner join riwayat_pembelian as rp on rp.id_dorayaki = d.id");
-    // $stmt->execute();
-    // $result = $stmt->fetchall();
+    $stmt = $db->prepare("SELECT * FROM dorayaki as d inner join riwayat_pembelian as rp on rp.id_dorayaki = d.id");
+    $stmt->execute();
+    $pembelian = $stmt->fetchall();
     
 }
 catch(PDOException $e) {
@@ -47,30 +47,30 @@ catch(PDOException $e) {
     </nav>
     <!-- product -->
     <div class="container">
-        <!-- <h1>Riwayat Pembelian</h1>
+        <h1>History</h1>
         <table>
             <thead>
                 <tr>
-                    <td>Variant Name</td>
-                    <td>Amount</td>
-                    <td>Total Price</td>
-                    <td>Time</td>
+                    <th>Variant Name</th>
+                    <th>Amount</th>
+                    <th>Total Price</th>
+                    <th>Time</th>
                 </tr>
             </thead>
             <tbody>
-                ?php
-                foreach ($result as $row) {
+                <?php
+                foreach ($pembelian as $row) {
                     echo ("<tr>
                     <td>{$row["name"]}</td>
                     <td>{$row["amount"]}</td>
                     <td>{$row["total_price"]}</td>
-                    <td>{$row["change_time"]}</td>
+                    <td>{$row["buy_time"]}</td>
                     </tr>");
                 }
                 ?>
             </tbody>
-        </table> -->
-        <h1>History</h1>
+        </table>
+
         <table>
             <thead>
                 <tr>
@@ -82,7 +82,7 @@ catch(PDOException $e) {
             </thead>
             <tbody>
                 <?php
-                foreach ($result as $row) {
+                foreach ($perubahan as $row) {
                     echo ("<tr>
                     <td>{$row["name"]}</td>
                     <td>{$row["amount_changed"]}</td>
