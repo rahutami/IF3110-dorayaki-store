@@ -4,13 +4,13 @@ $db = (new DBConnection())->connect();
 
 try{
     if ($_POST["id"]) {
-        $db->exec("SET foreign_key_checks = 0;");
+        $db->exec("PRAGMA foreign_keys = OFF;");
         
         $stmt = $db->prepare("DELETE FROM dorayaki WHERE id = ?");
         $stmt->execute(array($_POST["id"]));
 
-        $db->exec("SET foreign_key_checks = 1;");
-        echo $stmt->rowCount();
+        $db->exec("PRAGMA foreign_keys = ON;");
+        header('Location: home.php');
     }
 
 } catch(PDOException $e) {

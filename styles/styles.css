@@ -1,148 +1,151 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
 body {
-    padding: 0;
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    background-color: rgb(211,234,233);
+  padding: 0;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  background-color: rgb(211, 234, 233);
 }
 h1 {
-    color: rgb(254,144,122);
+  color: rgb(254, 144, 122);
 }
 
 /* navbar */
 nav {
-    background-color: rgb(254,233,225);
-    overflow: hidden;
-    font-weight: 600;
+  background-color: rgb(254, 233, 225);
+  overflow: hidden;
+  font-weight: 600;
 }
 
 nav a {
-    float: left;
-    display: block;
-    color: rgb(254,144,122);
-    text-align: center;
-    padding: 1rem;
-    text-decoration: none;
+  float: left;
+  display: block;
+  color: rgb(254, 144, 122);
+  text-align: center;
+  padding: 1rem;
+  text-decoration: none;
 }
 nav .logo {
-    font-weight: 800;
-    text-transform: uppercase;
-    color: rgb(255,192,64);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: rgb(255, 192, 64);
 }
 
 nav a:hover {
-    color: rgb(255,192,64);
+  color: rgb(255, 192, 64);
 }
 
 nav a.active {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 nav .icon {
-    display: none;
+  display: none;
 }
 
 .jumbotron {
-    background-color: rgb(254,144,122);
-    color: rgb(254,233,225);
-    padding: 2rem 5rem;
+  background-color: rgb(254, 144, 122);
+  color: rgb(254, 233, 225);
+  padding: 2rem 5rem;
 }
 .jumbotron h1 {
-    color: rgb(254,233,225);
+  color: rgb(254, 233, 225);
 }
 .headline {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .container {
-    padding: 1rem 5rem;
+  padding: 1rem 5rem;
 }
 
 .btn-jumbotron {
-    background-color: rgb(254,233,225);
-    color: rgb(254,144,122);
-    border: none;
-    padding: 1rem;
-    text-decoration: none;
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
+  background-color: rgb(254, 233, 225);
+  color: rgb(254, 144, 122);
+  border: none;
+  padding: 1rem;
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 .btn-jumbotron a {
-    color: rgb(254,144,122);
-    text-decoration: none;
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
+  color: rgb(254, 144, 122);
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 .products {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-bottom: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 3rem;
 }
 .product-card {
-    background-color: rgb(254,233,225);
-    box-shadow: 0.5rem 0.5rem rgb(254,144,122);
-    width: 250px;
-    margin: 1rem;
-    padding: 1rem;
-    text-align: center;
-    color: rgb(254,144,122);
-
-  }
-.product-name {
-    font-weight: 500;
+  background-color: rgb(254, 233, 225);
+  box-shadow: 0.5rem 0.5rem rgb(254, 144, 122);
+  width: 250px;
+  margin: 1rem;
+  padding: 1rem;
+  text-align: center;
+  color: rgb(254, 144, 122);
 }
-  .product-thumbnail {
-      max-width: 200px;
-  }
-  .product-description {
-      font-weight: 400;
-    color: rgb(254,144,122);
-  }
-  
-  .show {
-      text-decoration: none;
-      font-weight: 600;
-      color: rgb(255,192,64);
-  }
-  .show:hover {
-      text-decoration: underline;
-  }
+.product-name {
+  font-weight: 500;
+}
+.product-thumbnail {
+  max-width: 200px;
+}
+.product-description {
+  font-weight: 400;
+  color: rgb(254, 144, 122);
+}
+
+.show {
+  text-decoration: none;
+  font-weight: 600;
+  color: rgb(255, 192, 64);
+}
+.show:hover {
+  text-decoration: underline;
+}
 
 footer {
-    left: 0;
-    bottom: 0;
-    position:fixed;
-    width: 100%;
-    padding: 1rem;
-    margin-top: 1.5rem;
-    background-color: rgb(254,144,122);
-    color: rgb(254,233,225);
-    text-align: center;
+  left: 0;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  background-color: rgb(254, 144, 122);
+  color: rgb(254, 233, 225);
+  text-align: center;
 }
 
 .row {
-    display: flex;
+  display: flex;
 }
 .column {
-    flex: 50%;
-    padding-left: 1.5rem;
+  flex: 50%;
+  padding-left: 1.5rem;
 }
 @media screen and (max-width: 600px) {
-    .column {
-      width: 100%;
-    }
+  .column {
+    width: 100%;
   }
-.product-photo {
-    max-width: 250px;
 }
-.center { 
-    text-align: center;
+.product-photo {
+  max-width: 250px;
+}
+.center {
+  text-align: center;
+}
+
+.hide {
+  display: none;
 }
