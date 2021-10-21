@@ -72,6 +72,11 @@ catch(PDOException $e) {
                 style="font-weight: 600;text-transform: uppercase;">Update</button>
                 </form>
 
+                <form method="post" class="cartForm" action="delete-variant.php">
+                    <input type="text" value=<?php echo $_GET["id"]?> id="id" name="id" class="hide">
+                    <button type="submit" name="submit" class="btn-jumbotron" 
+                style="font-weight: 600;text-transform: uppercase;">Hapus Varian</button>
+                </form>
             </div>
         </div>
     </div>
