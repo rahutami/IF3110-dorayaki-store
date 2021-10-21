@@ -19,17 +19,22 @@ try{
         $stmt_dorayaki = $db->prepare("UPDATE dorayaki SET amount = ? WHERE id = ?");
 
         if($_POST["method"] == "pembelian"){
+
             $new_amount = (int) $dorayaki["amount"] - (int) $_POST["amount"];
-            $stmt_riwayat = $db->prepare("INSERT INTO riwayat_pembelian (id_dorayaki, id_user, amount) VALUES (?,?,?);");
-            $stmt_riwayat->execute(array($_POST["id"], 1, $_POST["amount"]));
+            $total_price = ((int) $dorayaki["price"]) * ((int) $_POST["amount"]);
+            $stmt_riwayat = $db->prepare("INSERT INTO riwayat_pembelian (id_dorayaki, id_user, amount, total_price, buy_time) VALUES (?,?,?,?,datetime());");
+            $stmt_riwayat->execute(array($_POST["id"], 1, $_POST["amount"], $total_price));
             $stmt_dorayaki->execute(array($new_amount, $_POST["id"]));
+
         } else if ($_POST["method"] == "perubahan"){
+
             $new_amount = (int) $_POST["amount"];
             $amount_changed = (int) $_POST["amount"] - (int) $dorayaki["amount"];
-            $stmt_riwayat = $db->prepare("INSERT INTO riwayat_perubahan (id_dorayaki, id_user, amount_changed, new_amount) VALUES (?,?,?,?);");
+            $stmt_riwayat = $db->prepare("INSERT INTO riwayat_perubahan (id_dorayaki, id_user, amount_changed, new_amount, change_time) VALUES (?,?,?,?,datetime());");
             $stmt_riwayat->execute(array($_POST["id"], 1, $amount_changed, $new_amount));
             $stmt_dorayaki->execute(array($new_amount, $_POST["id"]));
             header('Location: change-amount-page.php?id='.$_POST["id"].'&success=true');
+
         } else {
             throw new Exception("method not available", 1);            
         }
@@ -38,7 +43,7 @@ try{
         // TODO: harusnya diredirect
     } else {
         // TODO: harusnya diredirect
-        header('Location: change-amount-page.php?success=false');
+        header('Location: change-amount-page.php?id='.$_POST["id"].'&success=false');
     }
 
 } catch(PDOException $e) {
