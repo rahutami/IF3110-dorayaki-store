@@ -1,8 +1,8 @@
 # SPEK HALAMAN LOGIN 
 
 - [] Halaman pertama yang ditampilkan jika pengguna belum login atau sudah logout adalah halaman Login. 
-- [] Pengguna dapat melakukan login sebagai user atau admin. 
-- [] Lakukan enkripsi pada password pengguna, algoritma yang digunakan dibebaskan.
+- [x] Pengguna dapat melakukan login sebagai user atau admin. 
+- [x] Lakukan enkripsi pada password pengguna, algoritma yang digunakan dibebaskan.
 
 - [] Identitas pengguna yang sudah login akan disimpan sebagai cookie dalam browser. 
 - [] Cookie menyimpan data pengguna dalam bentuk string dengan panjang tertentu. 

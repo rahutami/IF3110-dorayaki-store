@@ -14,3 +14,4 @@ Perbedaannya dengan admin:
 - [x] Jika pengguna login sebagai user, perubahan total harga ditampilkan secara **real-time** sesuai dengan perubahan jumlah pembelian varian dorayaki. 
 - [] Sedangkan, jika sebagai admin tidak perlu menampilkan total harga.
 - [x] Pastikan setelah proses pengubahan stok, ketersediaan varian dorayaki berubah sesuai yang diinginkan.
+- [] Plus minus button (?) wajib ya???

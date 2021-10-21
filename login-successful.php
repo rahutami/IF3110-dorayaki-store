@@ -9,5 +9,13 @@
 </head>
 <body>
 <h1>Login successful</h1>
+
+<a href="logout.php">Logout</a>
+Logged in as
+<?php
+echo ($_COOKIE["name"]) . "<br>";
+echo ($_COOKIE["admin"]) . "<br>";
+?>
+
 </body>
 </html>
