@@ -1,42 +1,45 @@
 <?php
-	// starting the session
-	session_start();
-
-    if (isset($_SESSION['username'])) {
-        // TODO ganti redirectnya
-        header("Location: home.php");
-    }
-
+    // if (isset($_COOKIE["name"]) AND isset($_COOKIE["password"]) AND isset($_COOKIE["admin"])) {
+    //     // TODO: change redirect kalo admin ke mana, kalo user ke mana
+    //     header("Location: index.php");
+    // }
     require_once('db/DBConnection.php');
     $db = (new DBConnection())->connect();
-
+    
     try{
-        if (isset($POST['login'])) {
+        if (isset($_POST['login'])) {
             $username = $_POST['username'];
             $password_input  = $_POST['password'];
-            $stmt = $db->prepare("SELECT name, password FROM user WHERE name = $username");
-            $stmt->execute();
+            $stmt = $db->prepare('SELECT id, name, password, admin FROM user WHERE name = (?)');
+            $stmt->execute(array($username));
             $row = $stmt->fetch();
-            if (count($row) > 0) {  
-                $password = $row['password'];
+            if (empty($row) != 1) {
+                $id = $row["id"];
+                $name = $row["name"];
+                $password = $row["password"];
+                $admin = $row["admin"];
+                $random_number = rand(1,99);
+                $token = password_hash($random_number,PASSWORD_DEFAULT);
                 if (password_verify($password_input, $password)) {
-                    session_start();
-                    $_SESSION['username'] = $username;
-                    $_SESSION['password'] = $password;
-                    // TODO ganti redirectnya
-                    // if login successful
+                    // insert token to database
+                    $stmtToken= $db->prepare("INSERT INTO riwayat_login (id_user, name, token) VALUES (?,?,?);");
+                    $stmtToken->execute(array($id, $username, $token));
+                    // set cookie, expiration time: 1 hour
+                    setcookie('id', $id, time() + 3600);
+                    setcookie('name', $name, time() + 3600);
+                    setcookie('admin', $admin, time() + 3600);
+                    setcookie('token', $token, time() + 3600);
+                    // TODO: change redirect
                     header("Location: login-successful.php");
-                    // die();
+                }
+                else {
+                    echo "wrong password";
                 }
             }
             else {
-                header("Location: login-failed.php");
+                echo "wrong username";
             }
         }
-        // else {
-        //     echo 'Login gagal silakan coba lagi';
-        // }
-
     } catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
     }
@@ -49,8 +52,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booksy</title>
-    <link href="../styles/styles.css" rel="stylesheet" />
+    <title>Stand with Dorayaki</title>
+    <link href="../styles/login-register.css" rel="stylesheet" />
 </head>
 
 <body>
