@@ -33,7 +33,8 @@ class DBConnection {
                     id_dorayaki INTEGER NOT NULL,
                     id_user INTEGER NOT NULL,
                     amount_changed INTEGER NOT NULL,
-                    new_amount INTEGER NOT NULL,      
+                    new_amount INTEGER NOT NULL,  
+                    -- update_time TIMESTAMP NOT NULL,    
                     FOREIGN KEY (id_dorayaki) REFERENCES dorayaki(id),
                     FOREIGN KEY (id_user) REFERENCES user(id)
                     );");
@@ -42,7 +43,8 @@ class DBConnection {
                     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                     id_dorayaki INTEGER NOT NULL,
                     id_user INTEGER NOT NULL,
-                    amount INTEGER NOT NULL,     
+                    amount INTEGER NOT NULL,  
+                    -- buy_time TIMESTAMP NOT NULL, 
                     FOREIGN KEY (id_dorayaki) REFERENCES dorayaki(id),
                     FOREIGN KEY (id_user) REFERENCES user(id)
                     );");

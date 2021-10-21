@@ -1,14 +1,11 @@
 <?php
-
-    if (isset($_COOKIE["name"]) AND isset($_COOKIE["password"]) AND isset($_COOKIE["admin"])) {
-        // TODO: change redirect
-        // masih belom bisa
-        // header("Location: index.php");
-    }
     require_once('db/DBConnection.php');
     $db = (new DBConnection())->connect();
-
     try{
+        if (isset($_COOKIE["name"]) AND isset($_COOKIE["password"]) AND isset($_COOKIE["admin"])) {
+            // TODO: change redirect kalo admin ke mana, kalo user ke mana
+            header("Location: index.php");
+        }
         if (isset($_POST['login'])) {
             $username = $_POST['username'];
             $password_input  = $_POST['password'];
@@ -47,7 +44,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand with Dorayaki</title>
-    <link href="../styles/styles.css" rel="stylesheet" />
+    <link href="../styles/login-register.css" rel="stylesheet" />
 </head>
 
 <body>

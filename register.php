@@ -27,7 +27,7 @@ echo "Error: " . $e->getMessage();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand with Dorayaki</title>
-    <link href="../styles/styles.css" rel="stylesheet" />
+    <link href="../styles/login-register.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -61,10 +61,10 @@ function checkUsernameValidity(str) {
     document.getElementById("usernameValidity").innerHTML = "";
     document.getElementById("username-not-valid").style.border = "none";
     return;
-  } else {
+  } 
+  else {
     const xmlhttp = new XMLHttpRequest();
     xmlhttp.onload = function() {
-    //   document.getElementById("usernameValidity").innerHTML = this.responseText;
       if (this.responseText == "valid") {
           document.getElementById("username-not-valid").style.border = "1px solid green";
           document.getElementById("usernameValidity").innerHTML = "";
@@ -77,23 +77,6 @@ function checkUsernameValidity(str) {
   xmlhttp.open("GET", "check-username-validity.php?username=" + str);
   xmlhttp.send();
   }
-  
-  // TODO gatau kenapa masih gabisa change bordernya
-  //if (this.responseText === "not valid") {
-//     if (document.getElementById("usernameValidity").textContent == "not valid") {
-//       document.getElementById("username-not-valid").style.border = "1px solid red";
-//     //   let element = document.getElementById("username-not-valid");
-//     //   element.setAttribute("style", "border: 2px solid #5A5A5A; color: red");
-//     //   alert(document.getElementById("username-not-valid").style.border);
-
-//     //   document.getElementById("username-not-valid").innerHTML = "nottt valid!!";
-//   }
-//    if (document.getElementById("usernameValidity").textContent == "valid") {
-// //   if (this.responseText === "valid"){
-//       document.getElementById("username-not-valid").style.border = "1px solid green";
-//     //   alert(document.getElementById("username-not-valid").style.border);
-
-//   }
 }
 </script>
 </html>

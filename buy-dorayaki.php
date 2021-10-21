@@ -100,7 +100,7 @@ try{
                 <h1 class="product-name"><?php echo $name; ?></h1>
                 <h3 class="product-description">Amount sold: <?php echo $amountSold; ?></h3> 
                 <h3 class="product-description">Price: Rp<span id="price"><?php echo $price; ?></span></h3>
-                <h3 class="product-description">Amount remaining: <?php echo $amountRemaining; ?></h3>
+                <h3 class="product-description">Amount remaining: <span id="dorayaki-stock"></span></h3>
                 <br>
                 <h4>Description:</h4>
                 <p><?php echo $description; ?></p>
@@ -117,9 +117,10 @@ try{
         </div>
     </div>
     <!-- footer -->
-    <footer id="test">Footer</footer>
+    <footer>Footer</footer>
 </body>
 <script>
+    // get total price
     document.getElementById("amount").addEventListener("change", getTotalPrice);
     function getTotalPrice() {
         let price = document.getElementById("price").textContent;
@@ -127,19 +128,18 @@ try{
         let totalPrice = price*amount;
         document.getElementById("totalPrice").innerHTML = totalPrice.toString();
     }
-    // // Masih belom bisa masih belom ngerti
-    // function updateStock() {
-    //     let productId = document.getElementById("product-id");
-    //     let xmlhttp = new XMLHttpRequest();
-    //     xmlhttp.onreadystatechange = function () {
-    //         if (this.readyState == 4 && this.status == 200) {
-    //             document.getElementById("test").innerHTML = this.responseText;
-    //         }
-        
-    //     };
-    //     xmlhttp.open("GET", "buy-dorayaki.php?id=" + productId, true);
-    //     xmlhttp.send();
-    // }
-
+    // real time stock
+    function getDorayakiStock() {
+        let id = document.getElementById("product-id").textContent;
+        let xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("dorayaki-stock").innerHTML = this.responseText;
+            }
+        }
+        xmlhttp.open("GET", "dorayaki-stock.php?id=" + id, true);
+        xmlhttp.send();
+    }
+    getDorayakiStock();
 </script>
 </html>

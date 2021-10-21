@@ -1,11 +1,5 @@
 <?php 
-// session_start();
-// if (!isset($_SESSION["login"])) {
-//   header("Location: login.php");
-// }
-// $current_user = $_SESSION["username"];
-// $cart = $_SESSION["cart"];
-// $totalItems = count($cart);
+
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +40,7 @@
     </div>
 
     <!-- footer -->
-    <footer>13519040 - Shafira Naya Aprisadianti</footer>
+    <footer>Footer</footer>
     <script src="../script/index.js"></script>
 </body>
 </html>
