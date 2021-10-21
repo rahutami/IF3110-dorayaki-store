@@ -1,25 +1,34 @@
 <?php
+    // if (isset($_COOKIE["name"]) AND isset($_COOKIE["password"]) AND isset($_COOKIE["admin"])) {
+    //     // TODO: change redirect kalo admin ke mana, kalo user ke mana
+    //     header("Location: index.php");
+    // }
     require_once('db/DBConnection.php');
     $db = (new DBConnection())->connect();
+    
     try{
-        if (isset($_COOKIE["name"]) AND isset($_COOKIE["password"]) AND isset($_COOKIE["admin"])) {
-            // TODO: change redirect kalo admin ke mana, kalo user ke mana
-            header("Location: index.php");
-        }
         if (isset($_POST['login'])) {
             $username = $_POST['username'];
             $password_input  = $_POST['password'];
-            $stmt = $db->prepare('SELECT name, password, admin FROM user WHERE name = (?)');
+            $stmt = $db->prepare('SELECT id, name, password, admin FROM user WHERE name = (?)');
             $stmt->execute(array($username));
             $row = $stmt->fetch();
             if (empty($row) != 1) {
+                $id = $row["id"];
                 $name = $row["name"];
                 $password = $row["password"];
                 $admin = $row["admin"];
+                $random_number = rand(1,99);
+                $token = password_hash($random_number,PASSWORD_DEFAULT);
                 if (password_verify($password_input, $password)) {
+                    // insert token to database
+                    $stmtToken= $db->prepare("INSERT INTO riwayat_login (id_user, name, token) VALUES (?,?,?);");
+                    $stmtToken->execute(array($id, $username, $token));
+                    // set cookie, expiration time: 1 hour
+                    setcookie('id', $id, time() + 3600);
                     setcookie('name', $name, time() + 3600);
-                    setcookie('password', $password, time() + 3600);
                     setcookie('admin', $admin, time() + 3600);
+                    setcookie('token', $token, time() + 3600);
                     // TODO: change redirect
                     header("Location: login-successful.php");
                 }

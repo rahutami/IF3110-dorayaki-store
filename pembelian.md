@@ -2,10 +2,10 @@
 
 ## Fitur Pembelian Dorayaki
 Sama seperti admin, user dapat:
-- [] Mengurangi stok varian dorayaki.
-- [] Ketika akan melakukan pembelian, stok perlu diperbarui secara **real-time** menggunakan AJAX.
+- [x] Mengurangi stok varian dorayaki.
+- [x] Ketika akan melakukan pembelian, stok perlu diperbarui secara **real-time** menggunakan AJAX.
 Perbedaannya dengan admin:
-- [] User hanya dapat mengurangi stok, admin dapat menambah.
+- [x] User hanya dapat mengurangi stok, admin dapat menambah.
 - [] Pada user, perlu ditampilkan total biaya yang harus dibayarkan, sedangkan pada admin tidak.
 
 ## Halaman Pengubahan Stok / Pembelian Dorayaki

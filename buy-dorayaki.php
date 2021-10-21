@@ -108,7 +108,7 @@ try{
                     <input type="hidden" id="method" name="method" value="pembelian">
                     <input type="hidden" id="id" name="id" value="<?php echo $_GET["id"]; ?>">
                     <label for="amount">Amount to buy:</label>
-                    <input type="number" id="amount" name="amount" min="1" max="<?php echo $amountRemaining; ?>" required>
+                    <input type="number" id="amount" name="amount" min="1" max="<?php echo $amountRemaining?>" required>
                     <p>Total price: <span id="totalPrice"></span></p>
                     <button type="submit" name="submit" class="btn-jumbotron" style="font-weight: 600; text-transform: uppercase;" onclick="updateStock();">Buy</button>
                 </form>
@@ -135,6 +135,8 @@ try{
         xmlhttp.onload = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("dorayaki-stock").innerHTML = this.responseText;
+                let amountInput = document.getElementById("amount");
+                amountInput.setAttribute("max",(this.responseText));
             }
         }
         xmlhttp.open("GET", "dorayaki-stock.php?id=" + id, true);

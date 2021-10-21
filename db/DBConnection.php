@@ -48,6 +48,13 @@ class DBConnection {
                     FOREIGN KEY (id_dorayaki) REFERENCES dorayaki(id),
                     FOREIGN KEY (id_user) REFERENCES user(id)
                     );");
+        $this->db->exec("CREATE TABLE IF NOT EXISTS riwayat_login (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            id_user INTEGER NOT NULL,
+            name VARCHAR(50) NOT NULL,
+            token VARCHAR(255) NOT NULL,
+            FOREIGN KEY (id_user) REFERENCES user(id)
+            );");
     }
 }
 ?>
