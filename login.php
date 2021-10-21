@@ -1,8 +1,4 @@
 <?php
-    // if (isset($_COOKIE["name"]) AND isset($_COOKIE["password"]) AND isset($_COOKIE["admin"])) {
-    //     // TODO: change redirect kalo admin ke mana, kalo user ke mana
-    //     header("Location: index.php");
-    // }
     require_once('db/DBConnection.php');
     $db = (new DBConnection())->connect();
     

@@ -12,14 +12,19 @@
         if ($row["id_user"] == $_COOKIE["id"] && $row["name"] == $_COOKIE["name"] && $row["token"] == $_COOKIE["token"]) {
             $loginState = true;
         }
-        if ($loginState) {
-            // TODO: change redirect kalo admin ke mana, kalo user ke mana
-            if ($_COOKIE["admin"] == 0) {
-                header("Location: index.php");
-            }
-            else {
-                header("Location: index.php");       
-            }
-        }
+
+        // if ($loginState) {
+        //     // TODO: change redirect kalo admin ke mana, kalo user ke mana
+        //     if ($_COOKIE["admin"] == 0) {
+        //         header("Location: index.php");
+        //     }
+        //     else {
+        //         header("Location: index.php");       
+        //     }
+        // }
+    }
+    // kalo belum login, gabisa akses page tsb dan diredirect ke login
+    else {
+        header("Location: login.php");
     }
 ?>

@@ -88,29 +88,5 @@ if(isset($_POST["name"]) && isset($_POST["amount"]) && isset($_POST["price"]) &&
     <footer>Footer</footer>
 </body>
 <script>
-    // get total price
-    document.getElementById("amount").addEventListener("change", getTotalPrice);
-    function getTotalPrice() {
-        let price = document.getElementById("price").textContent;
-        let amount = this.value;
-        let totalPrice = price*amount;
-        document.getElementById("totalPrice").innerHTML = totalPrice.toString();
-    }
-    // real time stock
-    function getDorayakiStock() {
-        let id = document.getElementById("product-id").textContent;
-        let xmlhttp = new XMLHttpRequest();
-        xmlhttp.onload = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("dorayaki-stock").innerHTML = this.responseText;
-                let amountInput = document.getElementById("amount");
-                amountInput.setAttribute("max",(this.responseText));
-            }
-        }
-        xmlhttp.open("GET", "dorayaki-stock.php?id=" + id, true);
-        xmlhttp.send();
-    }
-    getDorayakiStock();
-    setInterval(getDorayakiStock,1000); // akan get setiap 1 detik
 </script>
 </html>

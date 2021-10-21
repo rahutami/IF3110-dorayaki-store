@@ -1,6 +1,7 @@
 <?php
 require_once('./db/DBConnection.php');
 $db = (new DBConnection())->connect();
+require_once('check-login-state.php');
 
 // get details of dorayaki
 try {
@@ -70,7 +71,6 @@ catch(PDOException $e) {
                 ?>
             </tbody>
         </table>
-
         <table>
             <thead>
                 <tr>
@@ -92,7 +92,7 @@ catch(PDOException $e) {
                 }
                 ?>
             </tbody>
-        </table>
+        </table> -->
     </div>
     <!-- footer -->
     <footer>Footer</footer>
