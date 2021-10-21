@@ -1,7 +1,7 @@
 <?php
     require_once('./db/DBConnection.php');
     $db = (new DBConnection())->connect();
-
+    require_once('check-login-state.php');
     $uname = "";
 if(isset($_SESSION["userid"])) {
     $uid = $_SESSION["userid"];

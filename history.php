@@ -2,24 +2,29 @@
 require_once('./db/DBConnection.php');
 $db = (new DBConnection())->connect();
 require_once('check-login-state.php');
-
+if ($_COOKIE["admin"] == 1) {
+    $isAdmin = true;
+}
+else {
+    $isAdmin = false;
+}
 // get details of dorayaki
 try {
     // if admin
-    $stmt = $db->prepare("SELECT * FROM dorayaki as d inner join riwayat_perubahan as rp on rp.id_dorayaki = d.id");
-    $stmt->execute();
-    $perubahan = $stmt->fetchall();
-    // if user
-    $stmt = $db->prepare("SELECT * FROM dorayaki as d inner join riwayat_pembelian as rp on rp.id_dorayaki = d.id");
-    $stmt->execute();
-    $pembelian = $stmt->fetchall();
-    
+    if ($isAdmin) {
+        $stmt = $db->prepare("SELECT * FROM dorayaki as d inner join riwayat_perubahan as rp on rp.id_dorayaki = d.id");
+        $stmt->execute();
+        $perubahan = $stmt->fetchall();
+    }
+    else { // if user
+        $stmt = $db->prepare("SELECT * FROM dorayaki as d inner join riwayat_pembelian as rp on rp.id_dorayaki = d.id");
+        $stmt->execute();
+        $pembelian = $stmt->fetchall();
+    }
 }
 catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
-
-// buy dorayaki
 
 ?>
 <!DOCTYPE html>

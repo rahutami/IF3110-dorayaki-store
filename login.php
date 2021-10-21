@@ -29,11 +29,11 @@
                     header("Location: login-successful.php");
                 }
                 else {
-                    echo "wrong password";
+                    $invalid = true;
                 }
             }
             else {
-                echo "wrong username";
+                $invalid = true;
             }
         }
     } catch(PDOException $e) {
@@ -56,6 +56,7 @@
     <form action="" method="post">
         <div class="container">
             <h1>Login</h1>
+            <div class="form-group" id="validity"><?php echo $invalid ? "Login invalid" : ""?></div>
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" name="username" placeholder="Username" required />
@@ -68,9 +69,7 @@
                 <input type="submit" class="registerbtn" name="login" value="Login" />
                 <button class="btn-jumbotron"><a href="register.php">Register</a></button>
             </div>
-
         </div>
-
     </form>
 </body>
 

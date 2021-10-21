@@ -1,6 +1,11 @@
 <?php
 require_once('./db/DBConnection.php');
 $db = (new DBConnection())->connect();
+require_once('check-login-state.php');
+
+if ($COOKIE["admin"] != 0) {
+    // TODO: selain non-admin ga bisa add variant, redirect
+}
 
 // get details of dorayaki
 try {
@@ -80,7 +85,7 @@ try{
     <!-- navbar -->
     <nav>
         <a class="logo">Stand with Dorayaki</a>
-        <!-- <a class="logo">Hi, <?php echo $current_user; ?>!</a> -->
+        <a class="logo">Hi, <?php echo $COOKIE['name']; ?>!</a>
         <a href="index.php">Home</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
