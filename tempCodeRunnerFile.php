@@ -1,0 +1,2 @@
+<?php
+new_amount
