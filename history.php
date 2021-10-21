@@ -1,18 +1,19 @@
 <?php
 require_once('./db/DBConnection.php');
 $db = (new DBConnection())->connect();
+require_once('check-login-state.php');
 
 // get details of dorayaki
 try {
     // if admin
-    $stmt = $db->prepare("SELECT * FROM dorayaki as d inner join riwayat_perubahan as rp on rp.id_dorayaki = d.id");
-    $stmt->execute();
-    $result = $stmt->fetchall();
-    // if user
-    // $stmt = $db->prepare("SELECT * FROM dorayaki as d inner join riwayat_pembelian as rp on rp.id_dorayaki = d.id");
+    // $stmt = $db->prepare("SELECT * FROM dorayaki as d inner join riwayat_perubahan as rp on rp.id_dorayaki = d.id");
     // $stmt->execute();
     // $result = $stmt->fetchall();
-    
+    // if user
+    // TODO: buy time
+    $stmt = $db->prepare("SELECT d.name, rp.amount, (rp.amount*d.price) as total_price FROM dorayaki as d inner join riwayat_pembelian as rp on rp.id_dorayaki = d.id");
+    $stmt->execute();
+    $result = $stmt->fetchall();
 }
 catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
@@ -47,18 +48,18 @@ catch(PDOException $e) {
     </nav>
     <!-- product -->
     <div class="container">
-        <!-- <h1>Riwayat Pembelian</h1>
+        <h1>Riwayat Pembelian</h1>
         <table>
             <thead>
                 <tr>
-                    <td>Variant Name</td>
-                    <td>Amount</td>
-                    <td>Total Price</td>
-                    <td>Time</td>
+                    <th>Variant Name</th>
+                    <th>Amount</th>
+                    <th>Total Price</th>
+                    <th>Time</th>
                 </tr>
             </thead>
             <tbody>
-                ?php
+                <?php
                 foreach ($result as $row) {
                     echo ("<tr>
                     <td>{$row["name"]}</td>
@@ -69,8 +70,8 @@ catch(PDOException $e) {
                 }
                 ?>
             </tbody>
-        </table> -->
-        <h1>History</h1>
+        </table>
+        <!-- <h1>History</h1>
         <table>
             <thead>
                 <tr>
@@ -92,7 +93,7 @@ catch(PDOException $e) {
                 }
                 ?>
             </tbody>
-        </table>
+        </table> -->
     </div>
     <!-- footer -->
     <footer>Footer</footer>
