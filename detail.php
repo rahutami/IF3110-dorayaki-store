@@ -21,49 +21,6 @@ try {
 catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
-
-// select sum(amount) from riwayat_pembelian group by id_dorayaki having id_dorayaki = id;
-
-// buy dorayaki
-try{
-    // ! method: perubahan or pembelian
-    // ! perubahan = perubahan by admin
-    // ! pembelian = pembelian by pelanggan
-
-    // * ASUMSI:
-    // * - kalo pembelian itu gamasuk ke riwayat perubahan tapi cuma ke riwayat pembelian, vice versa
-    // * - pas perubahan by admin inputnya new amount
-    // * - pas pembelian inputnya amount yg dibeli
-    
-    if ($_POST["id"] && $_POST["amount"] && $_POST["method"]) {
-        $dorayaki = $db->query("SELECT * FROM dorayaki where id = " . $_POST["id"])->fetch();
-        $stmt_dorayaki = $db->prepare("UPDATE dorayaki SET amount = ? WHERE id = ?");
-        
-        if($_POST["method"] == "pembelian"){
-            $new_amount = (int) $dorayaki["amount"] - (int) $_POST["amount"];
-            $stmt_riwayat = $db->prepare("INSERT INTO riwayat_pembelian (id_dorayaki, id_user, amount) VALUES (?,?,?);");
-            $stmt_riwayat->execute(array($_POST["id"], 1, $_POST["amount"]));
-        } else if ($_POST["method"] == "perubahan"){
-            $new_amount = (int) $_POST["amount"];
-            $amount_changed = (int) $_POST["amount"] - (int) $dorayaki["amount"];
-            $stmt_riwayat = $db->prepare("INSERT INTO riwayat_perubahan (id_dorayaki, id_user, amount_changed, new_amount) VALUES (?,?,?,?);");
-            $stmt_riwayat->execute(array($_POST["id"], 1, $amount_changed, $new_amount));
-        } else {
-            throw new Exception("method not available", 1);            
-        }
-        
-        // *user id nanti didapet from session?
-        $stmt_dorayaki->execute(array($new_amount, $_POST["id"]));
-        // echo $stmt->rowCount();
-        // TODO: harusnya diredirect
-    } else {
-        // TODO: harusnya diredirect
-        echo "please include id, amount, and method";
-    }
-
-} catch(PDOException $e) {
-  echo "Error: " . $e->getMessage();
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,7 +61,9 @@ try{
                 <br>
                 <h4>Description:</h4>
                 <p><?php echo $description; ?></p>
-                <form action="" method="post" class="cartForm">
+
+                <!-- Need if else here -->
+                <form action="change-amount.php" method="post" class="cartForm">
                     <input type="hidden" id="method" name="method" value="pembelian">
                     <input type="hidden" id="id" name="id" value="<?php echo $_GET["id"]; ?>">
                     <label for="amount">Amount to buy:</label>
@@ -113,6 +72,20 @@ try{
                     <button type="submit" name="submit" class="btn-jumbotron" style="font-weight: 600; text-transform: uppercase;" onclick="updateStock();">Buy</button>
                 </form>
 
+                <form method="post" class="cartForm" action="change-amount.php">
+                    <label for="amount">New amount:</label>
+                    <input type="number" id="amount" name="amount" min="0" required>
+                    <input type="text" value=<?php echo $_GET["id"]?> id="id" name="id" class="hide">
+                    <input type="text" value="perubahan" id="method" name="method" class="hide">
+                    <button type="submit" name="submit" class="btn-jumbotron" 
+                style="font-weight: 600;text-transform: uppercase;">Update</button>
+                </form>
+
+                <form method="post" class="cartForm" action="delete-variant.php">
+                    <input type="text" value=<?php echo $_GET["id"]?> id="id" name="id" class="hide">
+                    <button type="submit" name="submit" class="btn-jumbotron" 
+                style="font-weight: 600;text-transform: uppercase;">Hapus Varian</button>
+                </form>
             </div>
         </div>
     </div>

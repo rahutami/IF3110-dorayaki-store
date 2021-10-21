@@ -11,6 +11,7 @@ class DBConnection {
     }
 
     public function initTables(){
+        try{
         $this->db->exec("CREATE TABLE IF NOT EXISTS dorayaki (
                     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                     name VARCHAR(100) NOT NULL,
@@ -56,6 +57,10 @@ class DBConnection {
             token VARCHAR(255) NOT NULL,
             FOREIGN KEY (id_user) REFERENCES user(id)
             );");
+
+        } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
     }
 }
 ?>
