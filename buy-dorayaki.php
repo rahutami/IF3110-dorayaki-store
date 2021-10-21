@@ -38,7 +38,7 @@ try{
     if ($_POST["id"] && $_POST["amount"] && $_POST["method"]) {
         $dorayaki = $db->query("SELECT * FROM dorayaki where id = " . $_POST["id"])->fetch();
         $stmt_dorayaki = $db->prepare("UPDATE dorayaki SET amount = ? WHERE id = ?");
-        
+        // TODO: ganti id_user
         if($_POST["method"] == "pembelian"){
             $new_amount = (int) $dorayaki["amount"] - (int) $_POST["amount"];
             $stmt_riwayat = $db->prepare("INSERT INTO riwayat_pembelian (id_dorayaki, id_user, amount) VALUES (?,?,?);");
