@@ -10,7 +10,7 @@ try{
         $stmt->execute(array($_POST["id"]));
 
         $db->exec("PRAGMA foreign_keys = ON;");
-        header('Location: home.php');
+        header('Location: dashboard.php');
     }
 
 } catch(PDOException $e) {
