@@ -132,7 +132,7 @@ try{
     function getDorayakiStock() {
         let id = document.getElementById("product-id").textContent;
         let xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onload = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("dorayaki-stock").innerHTML = this.responseText;
             }
@@ -141,5 +141,6 @@ try{
         xmlhttp.send();
     }
     getDorayakiStock();
+    setInterval(getDorayakiStock,1000); // akan get setiap 1 detik
 </script>
 </html>
