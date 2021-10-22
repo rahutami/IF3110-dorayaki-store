@@ -211,6 +211,7 @@ table th {
 .dashboard-container {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .topnav .search-container input,
@@ -261,6 +262,12 @@ table th {
   .search-container {
     display:none;
   }
+  .dashboard-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 90%;
+  }
 }
 
 @media screen and (max-height: 800px) and (max-width: 600px) {
@@ -274,27 +281,33 @@ table th {
   .topnav.responsive {
     position: relative;
   }
-  .topnav.responsive .icon {
+  .topnav .responsive .icon {
     position: absolute;
     right: 0;
     top: 0;
   }
-  .topnav .responsive a {
+  .topnav.responsive a {
     float: none;
     display: block;
     text-align: left;
+  }
+  .container {
+    width:90%;
+  }
+  .search-container {
+    display:none;
+  }
+  .dashboard-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 90%;
   }
   .row {
     flex-direction: column;
   }
   .column {
     width: 100%;
-  }
-  .container {
-    width: 90%;
-  }
-  .search-container {
-    display:none;
   }
 }
 
