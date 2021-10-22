@@ -15,8 +15,8 @@ try {
     $stmt->execute();
     $admin_hist = $stmt->fetchall();
     // if user
-    $stmt = $db->prepare("SELECT d.name as name, rp.amount_changed as amount, rp.total_price as total_price, rp.change_time as time FROM dorayaki as d inner join riwayat_dorayaki as rp on rp.id_dorayaki = d.id where method='pembelian'"); //where u.id = loggedin.id
-    $stmt->execute();
+    $stmt = $db->prepare("SELECT d.name as name, rp.amount_changed as amount, rp.total_price as total_price, rp.change_time as time FROM dorayaki as d inner join riwayat_dorayaki as rp on rp.id_dorayaki = d.id where method='pembelian' and rp.id_user = ?"); //where u.id = loggedin.id
+    $stmt->execute(array($_COOKIE["id"]));
     $buyer_hist = $stmt->fetchall();
     
 }
@@ -37,28 +37,8 @@ catch(PDOException $e) {
     
     <div class="container">
         <h1>History</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Variant Name</th>
-                    <th>Amount</th>
-                    <th>Total Price</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                foreach ($buyer_hist as $row) {
-                    echo ("<tr>
-                    <td>{$row["name"]}</td>
-                    <td>".(-1) * (int)$row["amount"]."</td>
-                    <td>{$row["total_price"]}</td>
-                    <td>{$row["time"]}</td>
-                    </tr>");
-                }
-                ?>
-            </tbody>
-        </table>
+        
+        <?php if ($isAdmin) { ?>
         <table>
             <thead>
                 <tr>
@@ -82,7 +62,32 @@ catch(PDOException $e) {
                 }
                 ?>
             </tbody>
-        </table> -->
+        </table>
+
+        <?php } else {?>
+        <table>
+            <thead>
+                <tr>
+                    <th>Variant Name</th>
+                    <th>Amount</th>
+                    <th>Total Price</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($buyer_hist as $row) {
+                    echo ("<tr>
+                    <td>{$row["name"]}</td>
+                    <td>".(-1) * (int)$row["amount"]."</td>
+                    <td>{$row["total_price"]}</td>
+                    <td>{$row["time"]}</td>
+                    </tr>");
+                }
+                ?>
+            </tbody>
+        </table>
+        <?php } ?>
     </div>
     <!-- footer -->
     <footer>Footer</footer>

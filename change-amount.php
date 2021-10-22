@@ -21,16 +21,16 @@ try{
         if($_POST["method"] == "pembelian"){
             $new_amount = (int) $dorayaki["amount"] - (int) $_POST["amount"];
             $total_price = ((int) $dorayaki["price"]) * ((int) $_POST["amount"]);
-            $stmt_riwayat = $db->prepare("INSERT INTO riwayat_dorayaki (id_dorayaki, id_user, amount_changed, change_time, total_price, method) VALUES (?,?,?,datetime(),?,?);");
-            $stmt_riwayat->execute(array($_POST["id"], 1,(-1) * $_POST["amount"], $total_price, "pembelian"));
+            $stmt_riwayat = $db->prepare("INSERT INTO riwayat_dorayaki (id_dorayaki, id_user, amount_changed, change_time, total_price, method) VALUES (?,?,?,datetime('now','localtime'),?,?);");
+            $stmt_riwayat->execute(array($_POST["id"], $_COOKIE["id"],(-1) * $_POST["amount"], $total_price, "pembelian"));
             $stmt_dorayaki->execute(array($new_amount, $_POST["id"]));
             header('Location: detail.php?id='.$_POST["id"].'&success=true');
         } else if ($_POST["method"] == "perubahan"){
 
             $new_amount = (int) $_POST["amount"];
             $amount_changed = (int) $_POST["amount"] - (int) $dorayaki["amount"];
-            $stmt_riwayat = $db->prepare("INSERT INTO riwayat_dorayaki (id_dorayaki, id_user, amount_changed, change_time, total_price, method) VALUES (?,?,?,datetime(),?,?);");
-            $stmt_riwayat->execute(array($_POST["id"], 1, $amount_changed, 0, "perubahan"));
+            $stmt_riwayat = $db->prepare("INSERT INTO riwayat_dorayaki (id_dorayaki, id_user, amount_changed, change_time, total_price, method) VALUES (?,?,?,datetime('now','localtime'),?,?);");
+            $stmt_riwayat->execute(array($_POST["id"], $_COOKIE["id"], $amount_changed, 0, "perubahan"));
             $stmt_dorayaki->execute(array($new_amount, $_POST["id"]));
             header('Location: detail.php?id='.$_POST["id"].'&success=true');
 

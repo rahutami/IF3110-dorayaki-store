@@ -1,6 +1,7 @@
 <?php
     require_once('db/DBConnection.php');
     $db = (new DBConnection())->connect();
+    $invalid = false;
     
     // require_once('check-login-state.php');
     try{

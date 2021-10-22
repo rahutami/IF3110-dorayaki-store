@@ -2,7 +2,7 @@
 require_once('./db/DBConnection.php');
 $db = (new DBConnection())->connect();
 // require_once('check-login-state.php');
-if ($_COOKIE["admin"] == 1) {
+if (isset($_COOKIE["admin"]) && $_COOKIE["admin"] == 1) {
     $isAdmin = true;
 }
 else {

@@ -7,7 +7,7 @@ if (isset($_COOKIE["name"]) AND isset($_COOKIE["id"]) AND isset($_COOKIE["admin"
 }
 // jika belum login atau sudah logout
 try{
-    if ($_POST["username"] && $_POST["password"] && $_POST["email"]) {
+    if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["email"]) && $_POST["username"] && $_POST["password"] && $_POST["email"]) {
         $hashed_password = password_hash($_POST["password"],PASSWORD_DEFAULT);
         // cek apakah username sudah ada di basis data atau belum
         $username_input = $_POST["username"];
