@@ -1,15 +1,20 @@
 # Tugas Besar 1 IF3110-2021-K04-01-56
 
 ## Deskripsi aplikasi web
-
+Web yang kami buat ini memanfaatkan HTML, CSS, JavaScript, Sqlite3, PHP, dan Ajax. Web kami merupakan sistem informasi pengelolaan stok dorayaki pada toko "Stand with Dorayaki". Pada web kami terdapat fitur autentikasi, pengelolaan dan manajemen stok dorayaki, pembelian dorayaki, melihat varian dorayaki, serta dapat melihat riwayat perubahan/pembelian dorayaki.
 ## Daftar requirement
+- XAMPP: [XAMPP Download](https://www.apachefriends.org/download.html)
+- Sqlite3: [Sqlite Download](https://www.sqlite.org/download.html)
 
 ## Cara instalasi
+1. Download semua requirements
+2. Baca panduan pada link [XAMPP FAQ](https://www.apachefriends.org/faq_windows.html) bagian "How do I install XAMPP?"
 
 ## Cara menjalankan server
-
-`php -S localhost:8000`
-
+1. Membuka XAMPP
+2. Klik Manage Servers -> Start All
+3. Mengetikkan command berikut ini pada terminal: `php -S localhost:8000`
+4. Lalu pergi ke http://localhost:8000/login.php untuk melakukan login dan menggunakan web
 ## Pembagian tugas
 
 ### Server-side (fitur)
