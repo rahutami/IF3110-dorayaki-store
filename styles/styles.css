@@ -168,6 +168,9 @@ footer {
     display: block;
     text-align: left;
   }
+  .container {
+    width:90%;
+  }
 }
 
 @media screen and (max-height: 800px) and (max-width: 600px) {
@@ -196,5 +199,8 @@ footer {
   }
   .column {
     width: 100%;
+  }
+  .container {
+    width: 90%;
   }
 }
