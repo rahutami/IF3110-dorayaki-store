@@ -16,24 +16,5 @@
     $error = '';
     
     echo(json_encode($result));
-    // echo(json_encode(array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)));
-    // echo 1;
-
-    
-// function makeTextIntoPriceText($str)
-// {
-//     $j=0;
-//     $new_string = "";
-//     for ($i = strlen($str)-1; $i >= 0; $i--) {
-//         if ($j % 3 === 0 && $j != 0) {
-//             $new_string = "." . $new_string;
-//         }
-//         $new_string = $str[$i] . $new_string;
-//         $j++;
-//     };
-//     $new_string = $new_string . ",00";
-
-//     return $new_string;
-// };
 ?>
 

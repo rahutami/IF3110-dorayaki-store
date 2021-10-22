@@ -3,7 +3,7 @@ require_once('db/DBConnection.php');
 $db = (new DBConnection())->connect();
 // jika sudah login
 if (isset($_COOKIE["name"]) AND isset($_COOKIE["id"]) AND isset($_COOKIE["admin"]) AND isset($_COOKIE["token"])) {
-    header("Location: index.php");
+    header("Location: dashboard.php");
 }
 // jika belum login atau sudah logout
 try{
@@ -44,7 +44,7 @@ try{
                 setcookie('name', $name, time() + 3600);
                 setcookie('admin', $admin, time() + 3600);
                 setcookie('token', $token, time() + 3600);
-                header("Location: index.php");
+                header("Location: dashboard.php");
             }
         }
         else {
