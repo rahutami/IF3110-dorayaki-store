@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
+html {
+  --darkpink: rgb(254, 144, 122);
+  --lightpink: rgb(254, 233, 225);
+  --orange: rgb(255, 192, 64);
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -8,12 +14,12 @@ body {
   background-color: rgb(211, 234, 233);
 }
 h1 {
-  color: rgb(254, 144, 122);
+  color: var(--darkpink);
 }
 
 /* navbar */
 nav {
-  background-color: rgb(254, 233, 225);
+  background-color: var(--lightpink);
   overflow: hidden;
   font-weight: 600;
 }
@@ -21,7 +27,7 @@ nav {
 nav a {
   float: left;
   display: block;
-  color: rgb(254, 144, 122);
+  color: var(--darkpink);
   text-align: center;
   padding: 1rem;
   text-decoration: none;
@@ -29,11 +35,11 @@ nav a {
 nav .logo {
   font-weight: 800;
   text-transform: uppercase;
-  color: rgb(255, 192, 64);
+  color: var(--orange);
 }
 
 nav a:hover {
-  color: rgb(255, 192, 64);
+  color: var(--orange);
 }
 
 nav a.active {
@@ -45,12 +51,12 @@ nav .icon {
 }
 
 .jumbotron {
-  background-color: rgb(254, 144, 122);
-  color: rgb(254, 233, 225);
+  background-color: var(--darkpink);
+  color: var(--lightpink);
   padding: 2rem 5rem;
 }
 .jumbotron h1 {
-  color: rgb(254, 233, 225);
+  color: var(--lightpink);
 }
 .headline {
   font-weight: 700;
@@ -61,8 +67,8 @@ nav .icon {
 }
 
 .btn-jumbotron {
-  background-color: rgb(254, 233, 225);
-  color: rgb(254, 144, 122);
+  background-color: var(--lightpink);
+  color: var(--darkpink);
   border: none;
   padding: 1rem;
   text-decoration: none;
@@ -72,7 +78,7 @@ nav .icon {
 }
 
 .btn-jumbotron a {
-  color: rgb(254, 144, 122);
+  color: var(--darkpink);
   text-decoration: none;
   font-weight: 600;
   text-transform: uppercase;
@@ -87,13 +93,13 @@ nav .icon {
   margin-bottom: 3rem;
 }
 .product-card {
-  background-color: rgb(254, 233, 225);
-  box-shadow: 0.5rem 0.5rem rgb(254, 144, 122);
+  background-color: var(--lightpink);
+  box-shadow: 0.5rem 0.5rem var(--darkpink);
   width: 250px;
   margin: 1rem;
   padding: 1rem;
   text-align: center;
-  color: rgb(254, 144, 122);
+  color: var(--darkpink);
 }
 .product-name {
   font-weight: 500;
@@ -103,13 +109,13 @@ nav .icon {
 }
 .product-description {
   font-weight: 400;
-  color: rgb(254, 144, 122);
+  color: var(--darkpink);
 }
 
 .show {
   text-decoration: none;
   font-weight: 600;
-  color: rgb(255, 192, 64);
+  color: var(--orange);
 }
 .show:hover {
   text-decoration: underline;
@@ -122,8 +128,8 @@ footer {
   width: 100%;
   padding: 1rem;
   margin-top: 1.5rem;
-  background-color: rgb(254, 144, 122);
-  color: rgb(254, 233, 225);
+  background-color: var(--darkpink);
+  color: var(--lightpink);
   text-align: center;
 }
 
@@ -149,8 +155,85 @@ footer {
 .hide {
   display: none;
 }
-.center { 
-    text-align: center;
+.center {
+  text-align: center;
 }
 
+table {
+  border-collapse: collapse;
+  width: 80%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
 
+th,
+td {
+  border: 1px solid var(--lightpink);
+  padding: 5px;
+  text-align: center;
+}
+
+table th {
+  background-color: var(--darkpink);
+}
+
+.input-set {
+  width: 80%;
+  margin: 10px 0;
+}
+
+.input-set label {
+  display: inline-block;
+  width: 200px;
+  font-weight: bold;
+  color: var(--darkpink);
+}
+
+.item img {
+  width: 200px;
+}
+
+.item {
+  text-decoration: none;
+  color: var(--darkpink);
+  border: 1px solid #f0f0f0;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: var(--lightpink);
+}
+
+.dashboard-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav input,
+nav button {
+  border: none;
+}
+
+nav form button {
+  height: 2em;
+  background-color: var(--darkpink);
+  color: var(--lightpink);
+  font-weight: bold;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+#query {
+  line-height: 2em;
+  width: 80%;
+  max-width: 400px;
+}
+
+nav form {
+  flex-grow: 1;
+  text-align: center;
+}
