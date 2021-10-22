@@ -11,16 +11,14 @@ else {
 // get details of dorayaki
 try {
     // if admin
-    if ($isAdmin) {
-        $stmt = $db->prepare("SELECT * FROM dorayaki as d inner join riwayat_perubahan as rp on rp.id_dorayaki = d.id");
-        $stmt->execute();
-        $perubahan = $stmt->fetchall();
-    }
-    else { // if user
-        $stmt = $db->prepare("SELECT * FROM dorayaki as d inner join riwayat_pembelian as rp on rp.id_dorayaki = d.id");
-        $stmt->execute();
-        $pembelian = $stmt->fetchall();
-    }
+    $stmt = $db->prepare("SELECT d.name as name, rp.amount_changed as amount, u.name as username, rp.change_time as time, rp.method as method FROM dorayaki as d inner join riwayat_dorayaki as rp on rp.id_dorayaki = d.id inner join user as u on u.id = rp.id_user;");
+    $stmt->execute();
+    $admin_hist = $stmt->fetchall();
+    // if user
+    $stmt = $db->prepare("SELECT d.name as name, rp.amount_changed as amount, rp.total_price as total_price, rp.change_time as time FROM dorayaki as d inner join riwayat_dorayaki as rp on rp.id_dorayaki = d.id where method='pembelian'"); //where u.id = loggedin.id
+    $stmt->execute();
+    $buyer_hist = $stmt->fetchall();
+    
 }
 catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
@@ -30,28 +28,13 @@ catch(PDOException $e) {
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booksy</title>
-    <link href="../styles/styles.css" rel="stylesheet" />
-    <link href="../styles/style-tami.css" rel="stylesheet" />
-</head>
+<?php require_once('_header.php')?>
 
 <body>
     <!-- navbar -->
-    <nav>
-        <a class="logo">Booksy </a>
-        <!-- <a class="logo">Hi, <?php echo $current_user; ?>!</a> -->
-        <a href="index.php">Home</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <!-- <a href="../cart.php">Cart (<?php echo $totalItems; ?>)</a> -->
-        <!-- <a href="../logout.php">Logout</a> -->
-
-    </nav>
-    <!-- product -->
+    
+    <?php require_once('_navbar.php')?>
+    
     <div class="container">
         <h1>History</h1>
         <table>
@@ -65,12 +48,12 @@ catch(PDOException $e) {
             </thead>
             <tbody>
                 <?php
-                foreach ($pembelian as $row) {
+                foreach ($buyer_hist as $row) {
                     echo ("<tr>
                     <td>{$row["name"]}</td>
-                    <td>{$row["amount"]}</td>
+                    <td>".(-1) * (int)$row["amount"]."</td>
                     <td>{$row["total_price"]}</td>
-                    <td>{$row["buy_time"]}</td>
+                    <td>{$row["time"]}</td>
                     </tr>");
                 }
                 ?>
@@ -81,18 +64,20 @@ catch(PDOException $e) {
                 <tr>
                     <th>Variant Name</th>
                     <th>Added Amount</th>
-                    <th>New Amount</th>
+                    <th>Changed By</th>
                     <th>Time</th>
+                    <th>Method</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                foreach ($perubahan as $row) {
+                foreach ($admin_hist as $row) {
                     echo ("<tr>
                     <td>{$row["name"]}</td>
-                    <td>{$row["amount_changed"]}</td>
-                    <td>{$row["new_amount"]}</td>
-                    <td>{$row["change_time"]}</td>
+                    <td>{$row["amount"]}</td>
+                    <td>{$row["username"]}</td>
+                    <td>{$row["time"]}</td>
+                    <td>{$row["method"]}</td>
                     </tr>");
                 }
                 ?>

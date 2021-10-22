@@ -34,6 +34,7 @@ class DBConnection {
                     id_user INTEGER NOT NULL,
                     amount_changed INTEGER NOT NULL,     
                     change_time DATETIME NOT NULL,
+                    total_price INTEGER NOT NULL,
                     method VARCHAR(20) NOT NULL,     
                     FOREIGN KEY (id_dorayaki) REFERENCES dorayaki(id),
                     FOREIGN KEY (id_user) REFERENCES user(id)
@@ -44,7 +45,7 @@ class DBConnection {
                     id_dorayaki INTEGER NOT NULL,
                     id_user INTEGER NOT NULL,
                     amount_changed INTEGER NOT NULL,
-                    new_amount INTEGER NOT NULL,       
+                    new_amount INTEGER NOT NULL,
                     change_time DATETIME NOT NULL,     
                     FOREIGN KEY (id_dorayaki) REFERENCES dorayaki(id),
                     FOREIGN KEY (id_user) REFERENCES user(id)
@@ -54,7 +55,7 @@ class DBConnection {
                     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                     id_dorayaki INTEGER NOT NULL,
                     id_user INTEGER NOT NULL,
-                    amount INTEGER NOT NULL,     
+                    amount INTEGER NOT NULL,
                     total_price INTEGER NOT NULL,     
                     buy_time DATETIME NOT NULL, 
                     FOREIGN KEY (id_dorayaki) REFERENCES dorayaki(id),

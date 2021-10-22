@@ -1,10 +1,15 @@
 <?php
     require_once('./db/DBConnection.php');
     $db = (new DBConnection())->connect();
-    require_once('check-login-state.php');
+
     $uname = "";
     
-    $stmt = $db->prepare("select d.id as id, d.name as name, d.price as price, d.img_path as img_path, sum(rp.amount_changed) as total_sold from dorayaki as d left join riwayat_dorayaki as rp on d.id = rp.id_dorayaki group by d.id, d.name, d.price order by total_sold desc limit 10");
+    if(isset($_GET["query"])){
+        $searchQuery = $_GET["query"];
+    } else {
+        $searchQuery = '';
+    }
+    $stmt = $db->prepare("select * from (select d.id as id, d.name as name, d.price as price, d.img_path as img_path, sum(rp.amount_changed) as total_sold from dorayaki as d left join riwayat_dorayaki as rp on d.id = rp.id_dorayaki group by d.id, d.name, d.price order by total_sold desc) where name like '%$searchQuery%'");
     $stmt->execute();
     $result = $stmt->fetchall();
 
@@ -28,13 +33,12 @@ function makeTextIntoPriceText($str)
 
 <!DOCTYPE html>
 <html lang='en'>
+
 <?php require_once('_header.php')?>
 
 <body>
-    <!-- navbar -->
-    
     <?php require_once('_navbar.php')?>
-    
+
     <div class="container">
         <div class="dashboard-container">
         <?php

@@ -14,22 +14,25 @@ try {
     $stmt = $db->prepare("SELECT * FROM dorayaki WHERE id = $id");
     $stmt->execute();
     $row = $stmt->fetch();
-    $name = $row["name"];
-    $price = $row["price"];
-    $amountRemaining = $row["amount"];
-    $description = $row["description"];
-    $imagePath = $row["img_path"];
-    // TODO: belom bisa
-    $amountSoldStatement = $db->prepare("SELECT SUM(amount) as amount_sold FROM riwayat_pembelian GROUP BY id_dorayaki HAVING id_dorayaki = ?");
-    $amountSoldStatement->execute(array($id));
-    $amountSoldRow = $amountSoldStatement->fetch();
-    if (empty($amountSoldRow == 1)) {
-        $amountSold = 0;
-    }
-    else {
-        $amountSold = $amountSoldRow["amount_sold"];
-    }
 
+    if($row != 0){
+        $found = TRUE;
+        $name = $row["name"];
+        $amountSoldStatement = $db->prepare("select sum(rp.amount_changed) as total_sold, d.id as id from dorayaki as d left join riwayat_dorayaki as rp on d.id = rp.id_dorayaki where method = 'pembelian' and d.id = $id group by d.id");
+        $amountSoldStatement->execute();
+        $amountSoldRow = $amountSoldStatement->fetch();
+        if($amountSoldRow == 0){
+            $amountSold = 0;
+        } else {
+            $amountSold = $amountSoldRow["total_sold"];
+        }
+        $price = $row["price"];
+        $amountRemaining = $row["amount"];
+        $description = $row["description"];
+        $imagePath = $row["img_path"];
+    } else {
+        $found = FALSE;
+    }
 }
 catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
@@ -38,28 +41,16 @@ catch(PDOException $e) {
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stand with Dorayaki</title>
-    <link href="../styles/styles.css" rel="stylesheet" />
-</head>
+<?php require_once('_header.php')?>
 
 <body>
     <!-- navbar -->
-    <nav>
-        <a class="logo">Stand with Dorayaki</a>
-        <!-- <a class="logo">Hi, <?php echo $current_user; ?>!</a> -->
-        <a href="index.php">Home</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <!-- <a href="../cart.php">Cart (<?php echo $totalItems; ?>)</a> -->
-        <!-- <a href="../logout.php">Logout</a> -->
-
-    </nav>
+    
+    <?php require_once('_navbar.php')?>
+    
     <!-- product -->
     <div class="container">
+    <?php if($found) {?>
         <h1 class="headline">Product Details <span id="product-id"><?php echo $_GET["id"]; ?></span></h1>
         <div class="row">
             <div class="column center">
@@ -68,7 +59,7 @@ catch(PDOException $e) {
             </div>
             <div class="column">
                 <h1 class="product-name"><?php echo $name; ?></h1>
-                <h3 class="product-description">Amount sold: <?php echo $amountSold; ?></h3> 
+                <h3 class="product-description">Amount sold: <?php echo (-1) * (int)$amountSold; ?></h3> 
                 <h3 class="product-description">Price: Rp<span id="price"><?php echo $price; ?></span></h3>
                 <h3 class="product-description">Amount remaining: <span id="dorayaki-stock"></span></h3>
                 <br>
@@ -107,6 +98,9 @@ catch(PDOException $e) {
                 <?php } ?>
             </div>
         </div>
+    <?php } else {?>
+        <h1 style="text-align:center;">404 Not Found</h1>
+    <?php }?>
     </div>
     <!-- footer -->
     <footer>Footer</footer>
