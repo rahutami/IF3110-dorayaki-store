@@ -3,10 +3,6 @@ require_once('./db/DBConnection.php');
 $db = (new DBConnection())->connect();
 require_once('check-login-state.php');
 
-if ($COOKIE["admin"] != 0) {
-    // TODO: selain non-admin ga bisa add variant, redirect
-}
-
 // get details of dorayaki
 try {
     $id = $_GET['id'];

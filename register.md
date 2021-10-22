@@ -13,12 +13,12 @@ Halaman: Login, Register  + pengubahan stok/pembelian dorayaki
     - [x] Jika tidak unik, akan muncul pesan error pada form. 
 
 - [x] Validasi lain yang dilakukan pada sisi klien pada halaman ini adalah:
-    - [] Email memiliki format email standar seperti “example@example.com”.
+    - [x] Email memiliki format email standar seperti “example@example.com”.
         - Note: udah pake type="email" biasa bukan pake regex
     - [x] Username hanya menerima kombinasi alphabet, angka, dan underscore.
 - [x] Setelah semua nilai field sudah diisi dan valid, pengguna dapat mendaftarkan akun barunya.
     - Note: mending pake alert atau ??? 
-- [] Jika akun berhasil didaftarkan, pengguna langsung diarahkan ke Halaman Dashboard. 
+- [x] Jika akun berhasil didaftarkan, pengguna langsung diarahkan ke Halaman Dashboard. 
 - [x] Mekanisme cookie sama dengan Halaman Login.
 
 
