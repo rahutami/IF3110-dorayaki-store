@@ -3,19 +3,7 @@
     $db = (new DBConnection())->connect();
 
     $uname = "";
-if(isset($_SESSION["userid"])) {
-    $uid = $_SESSION["userid"];
-
-    $sql =<<<EOF
-    SELECT * FROM login WHERE id = '$uid';
-    EOF;
     
-    $ret = $db->query($sql);
-    //$precheck = mysqli_query($db, "");
-    while($row = $ret->fetchArray(SQLITE3_ASSOC)){
-        $uname = $row['name'];
-    }
-}
     $stmt = $db->prepare("select d.id as id, d.name as name, d.price as price, d.img_path as img_path, sum(rp.amount_changed) as total_sold from dorayaki as d left join riwayat_dorayaki as rp on d.id = rp.id_dorayaki group by d.id, d.name, d.price order by total_sold desc limit 10");
     $stmt->execute();
     $result = $stmt->fetchall();
@@ -36,19 +24,6 @@ function makeTextIntoPriceText($str)
 
     return $new_string;
 };
-
-function showAllDorayaki()
-{
-    $db = (new DBConnection())->connect();
-    $sql =<<<EOF
-    SELECT * FROM dorayaki;
-    EOF;
-    $ret = $db->query($sql);
-    while($row = $ret->fetcharray(SQLITE3_ASSOC)){
-        echo $ret["name"];
-        echo $ret["price"];
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -58,6 +33,7 @@ function showAllDorayaki()
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booksy</title>
+    <link href="../styles/style-tami.css" rel="stylesheet" />
     <link href="../styles/styles.css" rel="stylesheet" />
 </head>
 
@@ -74,18 +50,21 @@ function showAllDorayaki()
 
     </nav>
     <div class="container">
+        <div class="dashboard-container">
         <?php
         foreach ($result as $dorayaki) {
             echo("
-            <a href='detail.php?id={$dorayaki["id"]}'>
             <div class='item'>
+            <a href='detail.php?id={$dorayaki["id"]}'>
                 <img src='{$dorayaki["img_path"]}'>
                 <h2>{$dorayaki["name"]}</h2>
                 <h3>Rp".makeTextIntoPriceText($dorayaki["price"])."</h3>
-            </div>
-            </a>");
+            </a>
+            </div>");
         }
         ?>
+
+        </div>
     </div>
 </body>
         
