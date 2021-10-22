@@ -16,7 +16,7 @@ if(isset($_SESSION["userid"])) {
         $uname = $row['name'];
     }
 }
-    $stmt = $db->prepare("select d.id as id, d.name as name, d.price as price, d.img_path as img_path, sum(rp.amount) as total_sold from dorayaki as d left join riwayat_pembelian as rp on d.id = rp.id_dorayaki group by d.id, d.name, d.price order by total_sold desc limit 10");
+    $stmt = $db->prepare("select d.id as id, d.name as name, d.price as price, d.img_path as img_path, sum(rp.amount_changed) as total_sold from dorayaki as d left join riwayat_dorayaki as rp on d.id = rp.id_dorayaki group by d.id, d.name, d.price order by total_sold desc limit 10");
     $stmt->execute();
     $result = $stmt->fetchall();
 

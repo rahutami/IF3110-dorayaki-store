@@ -6,13 +6,13 @@ require_once('check-login-state.php');
 // get details of dorayaki
 try {
     // if admin
-    $stmt = $db->prepare("SELECT * FROM dorayaki as d inner join riwayat_perubahan as rp on rp.id_dorayaki = d.id");
+    $stmt = $db->prepare("SELECT d.name as name, rp.amount_changed as amount, u.name as username, rp.change_time as time, rp.method as method FROM dorayaki as d inner join riwayat_dorayaki as rp on rp.id_dorayaki = d.id inner join user as u on u.id = rp.id_user;");
     $stmt->execute();
-    $perubahan = $stmt->fetchall();
+    $admin_hist = $stmt->fetchall();
     // if user
-    $stmt = $db->prepare("SELECT * FROM dorayaki as d inner join riwayat_pembelian as rp on rp.id_dorayaki = d.id");
+    $stmt = $db->prepare("SELECT d.name as name, rp.amount_changed as amount, rp.total_price as total_price, rp.change_time as time FROM dorayaki as d inner join riwayat_dorayaki as rp on rp.id_dorayaki = d.id where method='pembelian'"); //where u.id = loggedin.id
     $stmt->execute();
-    $pembelian = $stmt->fetchall();
+    $buyer_hist = $stmt->fetchall();
     
 }
 catch(PDOException $e) {
@@ -60,12 +60,12 @@ catch(PDOException $e) {
             </thead>
             <tbody>
                 <?php
-                foreach ($pembelian as $row) {
+                foreach ($buyer_hist as $row) {
                     echo ("<tr>
                     <td>{$row["name"]}</td>
-                    <td>{$row["amount"]}</td>
+                    <td>".(-1) * (int)$row["amount"]."</td>
                     <td>{$row["total_price"]}</td>
-                    <td>{$row["buy_time"]}</td>
+                    <td>{$row["time"]}</td>
                     </tr>");
                 }
                 ?>
@@ -76,18 +76,20 @@ catch(PDOException $e) {
                 <tr>
                     <th>Variant Name</th>
                     <th>Added Amount</th>
-                    <th>New Amount</th>
+                    <th>Changed By</th>
                     <th>Time</th>
+                    <th>Method</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                foreach ($perubahan as $row) {
+                foreach ($admin_hist as $row) {
                     echo ("<tr>
                     <td>{$row["name"]}</td>
-                    <td>{$row["amount_changed"]}</td>
-                    <td>{$row["new_amount"]}</td>
-                    <td>{$row["change_time"]}</td>
+                    <td>{$row["amount"]}</td>
+                    <td>{$row["username"]}</td>
+                    <td>{$row["time"]}</td>
+                    <td>{$row["method"]}</td>
                     </tr>");
                 }
                 ?>

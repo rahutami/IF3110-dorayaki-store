@@ -8,15 +8,25 @@ try {
     $stmt = $db->prepare("SELECT * FROM dorayaki WHERE id = $id");
     $stmt->execute();
     $row = $stmt->fetch();
-    $name = $row["name"];
-    $amountSoldStatement = $db->prepare("SELECT SUM(AMOUNT) as amount_sold FROM riwayat_pembelian GROUP BY id_dorayaki HAVING id_dorayaki = $id");
-    $amountSoldStatement->execute();
-    $amountSoldRow = $amountSoldStatement->fetch();
-    $amountSold = $amountSoldRow["amount_sold"];
-    $price = $row["price"];
-    $amountRemaining = $row["amount"];
-    $description = $row["description"];
-    $imagePath = $row["img_path"];
+
+    if($row != 0){
+        $found = TRUE;
+        $name = $row["name"];
+        $amountSoldStatement = $db->prepare("select sum(rp.amount_changed) as total_sold, d.id as id from dorayaki as d left join riwayat_dorayaki as rp on d.id = rp.id_dorayaki where method = 'pembelian' and d.id = $id group by d.id");
+        $amountSoldStatement->execute();
+        $amountSoldRow = $amountSoldStatement->fetch();
+        if($amountSoldRow == 0){
+            $amountSold = 0;
+        } else {
+            $amountSold = $amountSoldRow["total_sold"];
+        }
+        $price = $row["price"];
+        $amountRemaining = $row["amount"];
+        $description = $row["description"];
+        $imagePath = $row["img_path"];
+    } else {
+        $found = FALSE;
+    }
 }
 catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
@@ -47,6 +57,7 @@ catch(PDOException $e) {
     </nav>
     <!-- product -->
     <div class="container">
+    <?php if($found) {?>
         <h1 class="headline">Product Details <span id="product-id"><?php echo $_GET["id"]; ?></span></h1>
         <div class="row">
             <div class="column center">
@@ -55,7 +66,7 @@ catch(PDOException $e) {
             </div>
             <div class="column">
                 <h1 class="product-name"><?php echo $name; ?></h1>
-                <h3 class="product-description">Amount sold: <?php echo $amountSold; ?></h3> 
+                <h3 class="product-description">Amount sold: <?php echo (-1) * (int)$amountSold; ?></h3> 
                 <h3 class="product-description">Price: Rp<span id="price"><?php echo $price; ?></span></h3>
                 <h3 class="product-description">Amount remaining: <span id="dorayaki-stock"></span></h3>
                 <br>
@@ -89,6 +100,9 @@ catch(PDOException $e) {
                 </form>
             </div>
         </div>
+    <?php } else {?>
+        <h1 style="text-align:center;">404 Not Found</h1>
+    <?php }?>
     </div>
     <!-- footer -->
     <footer>Footer</footer>

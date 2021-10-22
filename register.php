@@ -11,7 +11,7 @@
 
 require_once('db/DBConnection.php');
 $db = (new DBConnection())->connect();
-require_once('check-login-state.php');
+// require_once('check-login-state.php');
 
 try{
     if ($_POST["username"] && $_POST["password"] && $_POST["email"]) {
