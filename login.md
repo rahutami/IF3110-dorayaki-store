@@ -1,6 +1,6 @@
 # SPEK HALAMAN LOGIN 
 
-- [] Halaman pertama yang ditampilkan jika pengguna belum login atau sudah logout adalah halaman Login. 
+- [x] Halaman pertama yang ditampilkan jika pengguna belum login atau sudah logout adalah halaman Login. 
 - [x] Pengguna dapat melakukan login sebagai user atau admin. 
 - [x] Lakukan enkripsi pada password pengguna, algoritma yang digunakan dibebaskan.
 

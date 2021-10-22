@@ -2,6 +2,7 @@
     require_once('db/DBConnection.php');
     $db = (new DBConnection())->connect();
     
+    // require_once('check-login-state.php');
     try{
         if (isset($_POST['login'])) {
             $username = $_POST['username'];
@@ -26,7 +27,7 @@
                     setcookie('admin', $admin, time() + 3600);
                     setcookie('token', $token, time() + 3600);
                     // TODO: change redirect
-                    header("Location: login-successful.php");
+                    header("Location: dashboard.php");
                 }
                 else {
                     $invalid = true;
