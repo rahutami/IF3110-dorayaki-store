@@ -17,14 +17,19 @@ h1 {
   color: var(--darkpink);
 }
 
+<<<<<<< HEAD
 /* navbar */
 nav {
   background-color: var(--lightpink);
+=======
+.navbar {
+>>>>>>> shafira
   overflow: hidden;
+  background-color: rgb(254, 233, 225);
   font-weight: 600;
 }
 
-nav a {
+.navbar a {
   float: left;
   display: block;
   color: var(--darkpink);
@@ -32,6 +37,7 @@ nav a {
   padding: 1rem;
   text-decoration: none;
 }
+<<<<<<< HEAD
 nav .logo {
   font-weight: 800;
   text-transform: uppercase;
@@ -40,15 +46,23 @@ nav .logo {
 
 nav a:hover {
   color: var(--orange);
+=======
+
+.navbar a:hover {
+  color: rgb(255, 192, 64);
+>>>>>>> shafira
 }
 
-nav a.active {
-  text-decoration: underline;
+.navbar .logo {
+  font-weight: 800;
+  text-transform: uppercase;
+  color: rgb(255, 192, 64);
 }
 
-nav .icon {
+.navbar .icon {
   display: none;
 }
+
 
 .jumbotron {
   background-color: var(--darkpink);
@@ -140,13 +154,10 @@ footer {
   flex: 50%;
   padding-left: 1.5rem;
 }
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-  }
-}
+
 .product-photo {
   max-width: 250px;
+  height: auto;
 }
 .center {
   text-align: center;
@@ -177,6 +188,7 @@ table th {
   background-color: var(--darkpink);
 }
 
+<<<<<<< HEAD
 .input-set {
   width: 80%;
   margin: 10px 0;
@@ -237,3 +249,62 @@ nav form {
   flex-grow: 1;
   text-align: center;
 }
+=======
+@media screen and (max-height: 1280px) and (max-width: 768px) {
+  .navbar a:not(:first-child) {
+    display: none;
+  }
+  .navbar a.icon {
+    float: right;
+    display: block;
+  }
+  .navbar.responsive {
+    position: relative;
+  }
+  .navbar.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .navbar.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .container {
+    width:90%;
+  }
+}
+
+@media screen and (max-height: 800px) and (max-width: 600px) {
+  .navbar a:not(:first-child) {
+    display: none;
+  }
+  .navbar a.icon {
+    float: right;
+    display: block;
+  }
+  .navbar.responsive {
+    position: relative;
+  }
+  .navbar.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .navbar.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .row {
+    flex-direction: column;
+  }
+  .column {
+    width: 100%;
+  }
+  .container {
+    width: 90%;
+  }
+}
+>>>>>>> shafira
