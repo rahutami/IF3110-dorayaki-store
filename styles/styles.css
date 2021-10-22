@@ -17,19 +17,17 @@ h1 {
   color: var(--darkpink);
 }
 
-<<<<<<< HEAD
 /* navbar */
-nav {
+.topnav {
   background-color: var(--lightpink);
-=======
-.navbar {
->>>>>>> shafira
+}
+.topnav {
   overflow: hidden;
   background-color: rgb(254, 233, 225);
   font-weight: 600;
 }
 
-.navbar a {
+.topnav a {
   float: left;
   display: block;
   color: var(--darkpink);
@@ -37,29 +35,26 @@ nav {
   padding: 1rem;
   text-decoration: none;
 }
-<<<<<<< HEAD
-nav .logo {
+.topnav .logo {
   font-weight: 800;
   text-transform: uppercase;
   color: var(--orange);
 }
 
-nav a:hover {
+.topnav a:hover {
   color: var(--orange);
-=======
-
-.navbar a:hover {
+}
+.topnav a:hover {
   color: rgb(255, 192, 64);
->>>>>>> shafira
 }
 
-.navbar .logo {
+.topnav .logo {
   font-weight: 800;
   text-transform: uppercase;
   color: rgb(255, 192, 64);
 }
 
-.navbar .icon {
+.topnav .icon {
   display: none;
 }
 
@@ -188,7 +183,6 @@ table th {
   background-color: var(--darkpink);
 }
 
-<<<<<<< HEAD
 .input-set {
   width: 80%;
   margin: 10px 0;
@@ -219,18 +213,12 @@ table th {
   justify-content: space-between;
 }
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-nav input,
-nav button {
+.topnav .search-container input,
+.topnav .search-container button {
   border: none;
 }
 
-nav form button {
+.topnav .search-container form button {
   height: 2em;
   background-color: var(--darkpink);
   color: var(--lightpink);
@@ -245,28 +233,24 @@ nav form button {
   max-width: 400px;
 }
 
-nav form {
-  flex-grow: 1;
-  text-align: center;
-}
-=======
+
 @media screen and (max-height: 1280px) and (max-width: 768px) {
-  .navbar a:not(:first-child) {
+  .topnav a:not(:first-child) {
     display: none;
   }
-  .navbar a.icon {
+  .topnav a.icon {
     float: right;
     display: block;
   }
-  .navbar.responsive {
+  .topnav.responsive {
     position: relative;
   }
-  .navbar.responsive .icon {
+  .topnav .responsive .icon {
     position: absolute;
     right: 0;
     top: 0;
   }
-  .navbar.responsive a {
+  .topnav.responsive a {
     float: none;
     display: block;
     text-align: left;
@@ -274,25 +258,28 @@ nav form {
   .container {
     width:90%;
   }
+  .search-container {
+    display:none;
+  }
 }
 
 @media screen and (max-height: 800px) and (max-width: 600px) {
-  .navbar a:not(:first-child) {
+  .topnav a:not(:first-child) {
     display: none;
   }
-  .navbar a.icon {
+  .topnav a.icon {
     float: right;
     display: block;
   }
-  .navbar.responsive {
+  .topnav.responsive {
     position: relative;
   }
-  .navbar.responsive .icon {
+  .topnav.responsive .icon {
     position: absolute;
     right: 0;
     top: 0;
   }
-  .navbar.responsive a {
+  .topnav .responsive a {
     float: none;
     display: block;
     text-align: left;
@@ -306,5 +293,31 @@ nav form {
   .container {
     width: 90%;
   }
+  .search-container {
+    display:none;
+  }
 }
->>>>>>> shafira
+
+.topnav {
+  overflow: hidden;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.topnav .search-container {
+  float: right;
+  margin-top: 0.5rem;
+  margin-right: 2rem;
+}
+
+.topnav .search-container .form-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
