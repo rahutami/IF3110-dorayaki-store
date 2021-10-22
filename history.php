@@ -92,13 +92,4 @@ catch(PDOException $e) {
     <!-- footer -->
     <footer>Footer</footer>
 </body>
-<script>
-    document.getElementById("quantity").addEventListener("change", getTotalPrice);
-    function getTotalPrice() {
-        let price = document.getElementById("price").textContent;
-        let quantity = this.value;
-        let totalPrice = price*quantity;
-        document.getElementById("totalPrice").innerHTML = totalPrice.toString();
-    }
-</script>
 </html>

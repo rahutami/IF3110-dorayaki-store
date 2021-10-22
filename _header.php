@@ -4,5 +4,4 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand with Dorayaki</title>
     <link href="../styles/styles.css" rel="stylesheet" />
-    <link href="../styles/style-tami.css" rel="stylesheet" />
 </head>

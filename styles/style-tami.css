@@ -51,18 +51,18 @@ table th {
   justify-content: space-between;
 }
 
-nav {
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-nav input,
-nav button {
+.navbar input,
+.navbar button {
   border: none;
 }
 
-nav form button {
+.navbar form button {
   height: 2em;
   background-color: var(--darkpink);
   color: var(--lightpink);
