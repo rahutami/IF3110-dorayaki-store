@@ -23,16 +23,16 @@
 ### Client-side (halaman)
 1. Halaman login: 13519040
 2. Halaman register: 13519040
-3. Halaman dashboard
-4. Halaman hasil pencarian
+3. Halaman dashboard: 
+4. Halaman hasil pencarian:
 5. Halaman penambahan varian dorayaki baru: 13519192
-6. Halaman detail varian dorayaki: 13519040
-7. Halaman pengubahan stok / pembelian dorayaki
+6. Halaman detail varian dorayaki: 
+7. Halaman pengubahan stok / pembelian dorayaki: 13519040
 
 ## Bonus
 1. Data expire time: tidak dikerjakan
 2. Responsive design: 13519040
-3. Docker
+3. Docker: tidak dikerjakan
 4. Halaman riwayat pengubahan stok / pembelian dorayaki: 13519192
 
 # Panduan Pengerjaan
