@@ -3,7 +3,7 @@ require_once('./db/DBConnection.php');
 $db = (new DBConnection())->connect();
 require_once('check-login-state.php');
 
-if ($COOKIE["admin"] != 1) {
+if (isset($COOKIE["admin"]) && $COOKIE["admin"] != 1) {
     // TODO: selain admin ga bisa add variant, redirect
 }
 
@@ -15,9 +15,9 @@ if(isset($_POST["name"]) && isset($_POST["amount"]) && isset($_POST["price"]) &&
 
             // TODO: to be replaced by $_POST
             $stmt->execute(array($_POST["name"], $_POST["amount"], $_POST["price"], $_POST["description"], $_POST["img_path"]));
-            header('Location: add-variant-page.php?success=true');
+            header('Location: new-variant.php?success=true');
         } else {
-            header('Location: add-variant-page.php?success=false');
+            header('Location: new-variant.php?success=false');
         }
 
 
