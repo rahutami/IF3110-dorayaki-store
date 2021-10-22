@@ -10,35 +10,6 @@
 
 `php -S localhost:8000`
 
-## Screenshot tampilan aplikasi
-
-Home
-![home](/screenshots/home.jpg)
-
-Halaman Login
-![login](/screenshots/login.jpg)
-
-Halaman Register
-![register](/screenshots/register.jpg)
-
-Detail Dorayaki dari sisi Pengguna
-![detail-pembeli](/screenshots/detail-pembeli.jpg)
-
-Detail Dorayaki dari sisi Admin
-![detail-admin](/screenshots/detail-admin.jpg)
-
-Penambahan varian
-![new-variant](/screenshots/new-variant.jpg)
-
-Riwayat Perubahan (sisi admin)
-![riwayat-perubahan](/screenshots/riwayat-perubahan.jpg)
-
-Riwayat Pembelian (sisi pengguna)
-![riwayat-pembelian](/screenshots/riwayat-pembelian.jpg)
-
-Hasil Pencarian
-![search-result](/screenshots/search-result.jpg)
-
 ## Pembagian tugas
 
 ### Server-side (fitur)
@@ -67,3 +38,41 @@ Hasil Pencarian
 2. Responsive design: 13519040
 3. Docker: tidak dikerjakan
 4. Halaman riwayat pengubahan stok / pembelian dorayaki: 13519192
+
+## Screenshot tampilan aplikasi
+
+### Home
+
+![home](/screenshots/home.jpg)
+
+### Halaman Login
+
+![login](/screenshots/login.jpg)
+
+### Halaman Register
+
+![register](/screenshots/register.jpg)
+
+### Detail Dorayaki dari sisi Pengguna
+
+![detail-pembeli](/screenshots/detail-pembeli.jpg)
+
+### Detail Dorayaki dari sisi Admin
+
+![detail-admin](/screenshots/detail-admin.jpg)
+
+### Penambahan varian
+
+![new-variant](/screenshots/new-variant.jpg)
+
+### Riwayat Perubahan (sisi admin)
+
+![riwayat-perubahan](/screenshots/riwayat-perubahan.jpg)
+
+### Riwayat Pembelian (sisi pengguna)
+
+![riwayat-pembelian](/screenshots/riwayat-pembelian.jpg)
+
+### Hasil Pencarian
+
+![search-result](/screenshots/search-result.jpg)
