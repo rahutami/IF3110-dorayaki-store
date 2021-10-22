@@ -19,7 +19,7 @@ else {
         <div class="search-container">
             <form class="form-inline" action="search-result.php">
                 <input type="text" name="query" id="query">
-                <button type="submit">Search</button>
+                <button type="submit" class="search-btn">Search</button>
             </form>
         </div>
         <a href="javascript:void(0);" class="icon" onclick="responsiveNavbar();">

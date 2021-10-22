@@ -69,11 +69,7 @@ catch(PDOException $e) {
 
                 <?php if ($isAdmin) { ?>
                 <!-- if admin -->
-                 <form method="post" class="cartForm" action="delete-variant.php">
-                    <input type="text" value=<?php echo $_GET["id"]?> id="id" name="id" class="hide">
-                    <button type="submit" name="submit" class="btn-jumbotron" 
-                style="font-weight: 600;text-transform: uppercase;">Hapus Varian</button>
-                </form>
+                
                 <form method="post" class="cartForm" action="change-amount.php">
                     <label for="amount">New amount:</label>
                     <input type="number" id="amount" name="amount" min="0" required>
@@ -81,6 +77,12 @@ catch(PDOException $e) {
                     <input type="text" value="perubahan" id="method" name="method" class="hide">
                     <button type="submit" name="submit" class="btn-jumbotron" 
                         style="font-weight: 600;text-transform: uppercase;">Update</button>
+                </form>
+                <br>
+                <form method="post" class="cartForm" action="delete-variant.php">
+                    <button type="submit" name="delete" class="btn-jumbotron" 
+                        style="font-weight: 600;text-transform: uppercase;">Delete</button>
+                    <input type="text" value=<?php echo $_GET["id"]?> id="id" name="id" class="hide">
                 </form>
 
                 <?php 
@@ -123,7 +125,10 @@ catch(PDOException $e) {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("dorayaki-stock").innerHTML = this.responseText;
                 let amountInput = document.getElementById("amount");
+                
+                <?php if (!$isAdmin) { ?>
                 amountInput.setAttribute("max",(this.responseText));
+                <?php } ?>
             }
         }
         xmlhttp.open("GET", "dorayaki-stock.php?id=" + id, true);

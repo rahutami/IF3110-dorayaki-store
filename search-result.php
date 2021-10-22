@@ -1,63 +1,87 @@
-<?php
-    require_once('./db/DBConnection.php');
-    $db = (new DBConnection())->connect();
+<!DOCTYPE html>
+<html lang='en'>
 
-    $uname = "";
-    
+<?php 
     if(isset($_GET["query"])){
         $searchQuery = $_GET["query"];
     } else {
         $searchQuery = '';
     }
-    $stmt = $db->prepare("select * from (select d.id as id, d.name as name, d.price as price, d.img_path as img_path, sum(rp.amount_changed) as total_sold from dorayaki as d left join riwayat_dorayaki as rp on d.id = rp.id_dorayaki group by d.id, d.name, d.price order by total_sold desc) where name like '%$searchQuery%'");
-    $stmt->execute();
-    $result = $stmt->fetchall();
-
-    $error = '';
-function makeTextIntoPriceText($str)
-{
-    $j=0;
-    $new_string = "";
-    for ($i = strlen($str)-1; $i >= 0; $i--) {
-        if ($j % 3 === 0 && $j != 0) {
-            $new_string = "." . $new_string;
-        }
-        $new_string = $str[$i] . $new_string;
-        $j++;
-    };
-    $new_string = $new_string . ",00";
-
-    return $new_string;
-};
 ?>
-
-<!DOCTYPE html>
-<html lang='en'>
-
 <?php require_once('_header.php')?>
 
 <body>
     <?php require_once('_navbar.php')?>
 
     <div class="container">
-        <div class="dashboard-container">
-        <?php
-        foreach ($result as $dorayaki) {
-            echo("
-            <div class='item'>
-            <a href='detail.php?id={$dorayaki["id"]}'>
-                <img src='{$dorayaki["img_path"]}'>
-                <h2>{$dorayaki["name"]}</h2>
-                <h3>Rp".makeTextIntoPriceText($dorayaki["price"])."</h3>
-            </a>
-            </div>");
-        }
-        ?>
+        <div class="page-btns">
+            <button id="prev-page"><</button>
+            <button id="next-page">></button>
+        </div>
 
+        <div id="dashboard-container">
+
+         <input type="hidden" id="query-id" name="query-id" value="<?php echo $searchQuery?>">
         </div>
     </div>
 </body>
         
     <script>
+    let page = 1;
+
+    const prevPage = document.getElementById('prev-page');
+    prevPage.disabled = true;
+    const nextPage = document.getElementById('next-page');
+
+    prevPage.addEventListener('click', () => {
+        page--;
+        getSearchResult();
+    })
+
+    nextPage.addEventListener('click', () => {
+        page++;
+        getSearchResult();
+    })
+    
+    let query = document.getElementById('query-id').value;
+
+    function getSearchResult() {
+        let container = document.getElementById("dashboard-container");
+        console.log(query);
+        let xmlhttp = new XMLHttpRequest();
+        xmlhttp.onload = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let result = JSON.parse(this.responseText)
+
+                if(result.length <= 5*page) nextPage.disabled = true;
+                else nextPage.disabled = false;
+                
+                if(page === 1) prevPage.disabled = true;
+                else prevPage.disabled = false;
+
+                let stringResult = ''
+
+                for (let i = 5*(page-1); i < 5*page; i++){
+                    if(result[i] != undefined) stringResult += `
+                    <div class='item'>
+                        <a href='detail.php?id=${result[i]["id"]}'>
+                        <img src='${result[i]["img_path"]}'>
+                        <h2>${result[i]["name"]}</h2>
+                <h3>Rp${result[i]["price"]}</h3>
+            </a>
+            </div>`
+                }
+
+                container.innerHTML = stringResult;
+                // container.innerHTML = this.responseText;
+                // console.log(this.responseText);
+                console.log(result);
+            }
+        }
+        xmlhttp.open("GET", "get-search-result.php?query=" + query, true);
+        xmlhttp.send();
+    }
+
+    getSearchResult();
     </script>
 </html>

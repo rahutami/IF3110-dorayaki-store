@@ -13,6 +13,12 @@ body {
   font-weight: 400;
   background-color: rgb(211, 234, 233);
 }
+
+.search-btn:hover {
+  cursor: pointer;
+  background-color: rgba(254, 144, 122, 0.8);
+}
+
 h1 {
   color: var(--darkpink);
 }
@@ -57,7 +63,6 @@ h1 {
 .topnav .icon {
   display: none;
 }
-
 
 .jumbotron {
   background-color: var(--darkpink);
@@ -243,7 +248,6 @@ table th {
   max-width: 400px;
 }
 
-
 @media screen and (max-height: 1280px) and (max-width: 768px) {
   .topnav a:not(:first-child) {
     display: none;
@@ -266,10 +270,10 @@ table th {
     text-align: left;
   }
   .container {
-    width:90%;
+    width: 90%;
   }
   .search-container {
-    display:none;
+    display: none;
   }
   .dashboard-container {
     display: flex;
@@ -317,6 +321,12 @@ table th {
   }
   .column {
     width: 100%;
+  }
+  .container {
+    width: 90%;
+  }
+  .search-container {
+    display: none;
   }
 }
 
