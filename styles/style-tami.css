@@ -1,6 +1,7 @@
 html {
   --darkpink: rgb(254, 144, 122);
   --lightpink: rgb(254, 233, 225);
+  --orange: rgb(255, 192, 64);
 }
 table {
   border-collapse: collapse;
@@ -48,4 +49,35 @@ table th {
 .dashboard-container {
   display: flex;
   justify-content: space-between;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav input,
+nav button {
+  border: none;
+}
+
+nav form button {
+  height: 2em;
+  background-color: var(--darkpink);
+  color: var(--lightpink);
+  font-weight: bold;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+#query {
+  line-height: 2em;
+  width: 80%;
+  max-width: 400px;
+}
+
+nav form {
+  flex-grow: 1;
+  text-align: center;
 }
