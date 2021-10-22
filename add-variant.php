@@ -9,9 +9,9 @@ try{
 
         // TODO: to be replaced by $_POST
         $stmt->execute(array($_POST["name"], $_POST["amount"], $_POST["price"], $_POST["description"], $_POST["img_path"]));
-        header('Location: add-variant-page.php?success=true');
+        header('Location: new-variant.php?success=true');
     } else {
-        header('Location: add-variant-page.php?success=false');
+        header('Location: new-variant.php?success=false');
     }
 
 
