@@ -28,7 +28,7 @@
                     setcookie('admin', $admin, time() + 3600);
                     setcookie('token', $token, time() + 3600);
                     // TODO: change redirect
-                    header("Location: dashboard.php");
+                    header("Location: index.php");
                 }
                 else {
                     $invalid = true;

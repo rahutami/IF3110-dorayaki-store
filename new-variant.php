@@ -46,11 +46,11 @@ if(isset($_POST["name"]) && isset($_POST["amount"]) && isset($_POST["price"]) &&
             </div>
             <div class="input-set">
                 <label for="price">Harga</label>
-                <input type="text" name="price" id="price">
+                <input type="number" name="price" id="price">
             </div>
             <div class="input-set">
                 <label for="amount">Jumlah</label>
-                <input type="text" name="amount" id="amount">
+                <input type="number" name="amount" id="amount">
             </div>
             <div class="input-set">
                 <label for="deskripsi">Deskripsi</label>
