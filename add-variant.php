@@ -1,6 +1,11 @@
 <?php
 require_once('./db/DBConnection.php');
 $db = (new DBConnection())->connect();
+require_once('check-login-state.php');
+
+if ($COOKIE["admin"] != 1) {
+    // TODO: selain admin ga bisa add variant, redirect
+}
 
 try{
         // TODO: uncomment once frontend is ok

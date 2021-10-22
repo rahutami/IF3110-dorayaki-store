@@ -1,7 +1,13 @@
 <?php
 require_once('./db/DBConnection.php');
 $db = (new DBConnection())->connect();
-
+// require_once('check-login-state.php');
+if ($_COOKIE["admin"] == 1) {
+    $isAdmin = true;
+}
+else {
+    $isAdmin = false;
+}
 // get details of dorayaki
 try {
     $id = $_GET['id'];
@@ -60,31 +66,36 @@ catch(PDOException $e) {
                 <h4>Description:</h4>
                 <p><?php echo $description; ?></p>
 
-                <form action="change-amount.php" method="post" class="cartForm">
-                    <input type="hidden" id="method" name="method" value="pembelian">
-                    <input type="hidden" id="id" name="id" value="<?php echo $_GET["id"]; ?>">
-                    <label for="amount">Amount to buy:</label>
-                    <input type="number" id="amount" name="amount" min="1" max="<?php echo $amountRemaining?>" required>
-                    <p>Total price: <span id="totalPrice"></span></p>
-                    <button type="submit" name="submit" class="btn-jumbotron" style="font-weight: 600; text-transform: uppercase;" onclick="updateStock();">Buy</button>
+                <?php if ($isAdmin) { ?>
+                <!-- if admin -->
+                 <form method="post" class="cartForm" action="delete-variant.php">
+                    <input type="text" value=<?php echo $_GET["id"]?> id="id" name="id" class="hide">
+                    <button type="submit" name="submit" class="btn-jumbotron" 
+                style="font-weight: 600;text-transform: uppercase;">Hapus Varian</button>
                 </form>
-
-                <!-- if user -->
                 <form method="post" class="cartForm" action="change-amount.php">
                     <label for="amount">New amount:</label>
                     <input type="number" id="amount" name="amount" min="0" required>
                     <input type="text" value=<?php echo $_GET["id"]?> id="id" name="id" class="hide">
                     <input type="text" value="perubahan" id="method" name="method" class="hide">
                     <button type="submit" name="submit" class="btn-jumbotron" 
-                style="font-weight: 600;text-transform: uppercase;">Update</button>
+                        style="font-weight: 600;text-transform: uppercase;">Update</button>
                 </form>
 
-                <!-- if admin -->
-                <form method="post" class="cartForm" action="delete-variant.php">
-                    <input type="text" value=<?php echo $_GET["id"]?> id="id" name="id" class="hide">
-                    <button type="submit" name="submit" class="btn-jumbotron" 
-                style="font-weight: 600;text-transform: uppercase;">Hapus Varian</button>
+                <?php 
+                }
+                else { ?>
+                <!-- if user -->
+                <form action="change-amount.php" method="post" class="cartForm">
+                    <input type="hidden" id="method" name="method" value="pembelian">
+                    <input type="hidden" id="id" name="id" value="<?php echo $_GET["id"]; ?>">
+                    <label for="amount">Amount to buy:</label>
+                    <input type="number" id="amount" name="amount" min="0" max="<?php echo $amountRemaining?>" required>
+                    <p>Total price: <span id="totalPrice"></span></p>
+                    <button type="submit" name="submit" class="btn-jumbotron" style="font-weight: 600; text-transform: uppercase;" onclick="updateStock();">Buy</button>
                 </form>
+                
+                <?php } ?>
             </div>
         </div>
     <?php } else {?>

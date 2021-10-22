@@ -1,7 +1,7 @@
 <?php
     require_once('./db/DBConnection.php');
     $db = (new DBConnection())->connect();
-
+    require_once('check-login-state.php');
     $uname = "";
     
     $stmt = $db->prepare("select d.id as id, d.name as name, d.price as price, d.img_path as img_path, sum(rp.amount_changed) as total_sold from dorayaki as d left join riwayat_dorayaki as rp on d.id = rp.id_dorayaki group by d.id, d.name, d.price order by total_sold desc limit 10");
