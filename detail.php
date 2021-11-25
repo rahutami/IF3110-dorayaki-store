@@ -71,7 +71,7 @@ catch(PDOException $e) {
                 <!-- if admin -->
                 
                 <form method="post" class="cartForm" action="change-amount.php">
-                    <label for="amount">New amount:</label>
+                    <label for="amount">Request stok sebanyak:</label>
                     <input type="number" id="amount" name="amount" min="0" required>
                     <input type="text" value=<?php echo $_GET["id"]?> id="id" name="id" class="hide">
                     <input type="text" value="perubahan" id="method" name="method" class="hide">
