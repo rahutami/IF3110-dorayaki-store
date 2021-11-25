@@ -36,4 +36,5 @@ $response1 = str_replace("<soap:Body>","",$response);
 $response2 = str_replace("</soap:Body>","",$response1);
 
 echo $response; 
+// print_r($response);
 ?>
