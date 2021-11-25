@@ -42,7 +42,7 @@ try{
             $headers = array(
             "POST /package/package_1.3/packageservices.asmx HTTP/1.1",
             "Host: privpakservices.schenker.nu",
-            "Content-Type: application/soap+xml; charset=utf-8",
+            "Content-Type: text/xml",
             "Content-Length: ".strlen($reqXML)
             ); 
 
@@ -61,7 +61,7 @@ try{
             $response1 = str_replace("<soap:Body>","",$response);
             $response2 = str_replace("</soap:Body>","",$response1);
 
-            echo $response;
+            header('Location: detail.php?id='.$_POST["id"].'&success=true');
 
         } else {
             throw new Exception("method not available", 1);            
@@ -71,7 +71,7 @@ try{
         // TODO: harusnya diredirect
     } else {
         // TODO: harusnya diredirect
-        header('Location: change-amount-page.php?id='.$_POST["id"].'&success=false');
+        header('Location: detail.php?id='.$_POST["id"].'&success=false');
     }
 
 } catch(PDOException $e) {
