@@ -76,7 +76,7 @@ catch(PDOException $e) {
                     <input type="text" value=<?php echo $_GET["id"]?> id="id" name="id" class="hide">
                     <input type="text" value="perubahan" id="method" name="method" class="hide">
                     <button type="submit" name="submit" class="btn-jumbotron" 
-                        style="font-weight: 600;text-transform: uppercase;">Update</button>
+                        style="font-weight: 600;text-transform: uppercase;">Request</button>
                 </form>
                 <br>
                 <form method="post" class="cartForm" action="delete-variant.php">
@@ -98,6 +98,12 @@ catch(PDOException $e) {
                     <button type="submit" name="submit" class="btn-jumbotron" style="font-weight: 600; text-transform: uppercase;" onclick="updateStock();">Buy</button>
                 </form>
                 
+                <?php } ?>
+
+                <?php if(isset($_GET["success"]) && $_GET["success"] == "true") {?>
+                    <p>Request successfully sent</p>
+                <?php } else { ?>
+                    <p>Request error</p>
                 <?php } ?>
             </div>
         </div>

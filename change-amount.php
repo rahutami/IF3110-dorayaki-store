@@ -61,7 +61,12 @@ try{
             $response1 = str_replace("<soap:Body>","",$response);
             $response2 = str_replace("</soap:Body>","",$response1);
 
-            header('Location: detail.php?id='.$_POST["id"].'&success=true');
+            if (strpos($response, 'success') !== false) { 
+                header('Location: detail.php?id='.$_POST["id"].'&success=true');
+            } else {
+                header('Location: detail.php?id='.$_POST["id"].'&success=false');
+            }
+           
 
         } else {
             throw new Exception("method not available", 1);            
