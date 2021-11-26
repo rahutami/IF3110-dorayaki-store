@@ -15,7 +15,9 @@ function searchById($id, $array) {
     }
     return null;
  }
-$id = $_GET["id"];
+ if(isset($_GET["id"])){
+    $id = $_GET["id"];
+ }
 $reqXML = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.dorayakisupplier.com/">
 <soapenv:Header/>
 <soapenv:Body>
@@ -49,7 +51,13 @@ $response = preg_replace("/(<\/?)(\w+):([^>]*>)/", "$1$2$3", $response);
 $xml = new SimpleXMLElement($response);
 $body = $xml->xpath('//SBody')[0];
 $array = json_decode(json_encode((array)$body), TRUE); 
-$newArray = $array['ns2getAllVariantResponse']['return'];
+
+if(array_key_exists('return', $array['ns2getAllVariantResponse'])){
+    $success = true;
+    $newArray = $array['ns2getAllVariantResponse']['return'];
+} else {
+    $success = false;
+}
 
 ?>
 
@@ -65,18 +73,24 @@ $newArray = $array['ns2getAllVariantResponse']['return'];
     <!-- product -->
     <div class="container">
         <h1>Add New Variant</h1>
-        <h2>Available dorayaki from factory: </h2>
         <div class="dashboard-container">
 
-        <?php $newArray ?>
+        <?php
+        if($success){
+        ?>
+            <h2>Available dorayaki from factory: </h2>
         <?php
         for ($i=0;$i<(count($newArray));$i++) { ?>
+            <a style="text-decoration: none;" href="new-variant-factory.php?id=<?php echo $newArray[$i]["id"]?>">
             <div class='item'>
-                <a href="new-variant-factory.php?id=<?php echo $newArray[$i]["id"]?>"><?php echo $newArray[$i]["id"]?></a>
+                <?php echo $newArray[$i]["id"]?>
                 <p><?php echo $newArray[$i]["namaDorayaki"]?></p>
             </div>
+            </a>
+        <?php }
+        } else {?>
+        <p>You have requested too many times, or these was an error</p>
         <?php } ?>
-
         </div>
     </div>
     <!-- footer -->

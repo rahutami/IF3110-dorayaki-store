@@ -48,10 +48,14 @@ $response = preg_replace("/(<\/?)(\w+):([^>]*>)/", "$1$2$3", $response);
 $xml = new SimpleXMLElement($response);
 $body = $xml->xpath('//SBody')[0];
 $array = json_decode(json_encode((array)$body), TRUE); 
-$newArray = $array['ns2getAllVariantResponse']['return'];
-
-
+if(array_key_exists('return', $array['ns2getAllVariantResponse'])){
+    $success = true;
+    $newArray = $array['ns2getAllVariantResponse']['return'];
+} else {
+    $success = false;
+}
 try {
+    if(isset($_POST["name"]) && isset($_POST["amount"]) && isset($_POST["price"]) && isset($_POST["description"]) && isset($_POST["img_path"]))
     if ($_POST["name"] && $_POST["amount"] && $_POST["price"] && $_POST["description"] && $_POST["img_path"]) {
         $stmt = $db->prepare("INSERT INTO dorayaki (name, amount, price, description, img_path) VALUES (?,?,?,?,?)");
 
@@ -81,6 +85,7 @@ catch(PDOException $e) {
     <!-- product -->
     <div class="container">
         <h1>Add New Variant</h1>
+        <?php if($success) { ?>
         <form action="" method="POST">
             <div class="input-set">
                 <label for="name">Nama Variant</label>
@@ -104,7 +109,9 @@ catch(PDOException $e) {
                 <input type="text" name="img_path" id="img_path">
             </div>
             <button class="btn-jumbotron">Submit</button>
-
+        <?php } else {
+            echo "<p>You have requested too many times or these was an error</p>";
+        } ?>
         </form>
     <div>
         <?php if (!isset($_GET["success"])) { 
